@@ -449,7 +449,7 @@
 			<version>${jbehave.core.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.jbehave</groupId>
 			<artifactId>jbehave-core</artifactId>
 			<version>${jbehave.core.version}</version>
@@ -463,7 +463,7 @@
 			<version>${jbehave.site.version}</version>
 			<type>zip</type>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.jbehave.web</groupId>
 			<artifactId>jbehave-web-selenium</artifactId>
