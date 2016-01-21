@@ -47,7 +47,7 @@
 		<maven-jar-plugin.version>2.6</maven-jar-plugin.version>
 		<jbehave.core.version>3.10</jbehave.core.version>
 		<jbehave.site.version>3.3</jbehave.site.version>
-		<jbehave.web.version>3.6-SNAPSHOT</jbehave.web.version>
+		<jbehave.web.version>3.6-beta-2</jbehave.web.version>
 		<selenium.version>2.48.2</selenium.version>
 		<fluent.selenium.version>1.14.5</fluent.selenium.version>
 		<jettyProperties>${project.basedir}/src/test/resources/jetty.properties</jettyProperties>
@@ -58,6 +58,7 @@
 		<skip>false</skip>
 		<stories>**/CombinatoriusStories.java</stories>
 		<browser>chrome</browser>
+		<chromeDriver>src/test/resources/webdrivers/chromedriver</chromeDriver> 
 	</properties>
 
 	<dependencyManagement>
@@ -279,7 +280,7 @@
 							<scope>test</scope>
 							<systemProperties>
 								<browser>${browser}</browser>
-								<webdriver.chrome.driver>src/test/resources/chromedriver</webdriver.chrome.driver>
+								<webdriver.chrome.driver>${chromeDriver}</webdriver.chrome.driver>
 								<webdriver.ie.driver><!-- TODO --></webdriver.ie.driver>
 							</systemProperties>
 							<executorsClass>org.jbehave.core.embedder.executors.SameThreadExecutors</executorsClass>
@@ -553,6 +554,17 @@
 				<plugins>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<id>Windows</id>
+			<activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+			<properties>
+				<chromeDriver>src/test/resources/webdrivers/chromedriver.exe</chromeDriver>
+			</properties>
 		</profile>
 		<profile>
 			<id>fail-fast</id>
