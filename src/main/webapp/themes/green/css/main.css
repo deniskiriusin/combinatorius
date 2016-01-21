@@ -1,0 +1,76 @@
+body {
+	background: #4a884f;
+}
+
+body, h1, a:link, a:visited, a:active {
+	color: #b5ddb8;
+}
+
+div#get {
+	background: #3b743d;
+}
+
+div#tree, div.outer {
+	background: #244925;
+}
+
+div#help {
+	background-color: transparent;
+}
+
+div#help span.features {
+	color: #95cf9f;
+}
+
+div.response_name_div h3 > i {
+	margin-left: 20px;
+	color: #4a884f;
+}
+
+.highlighted {
+	background-color: #4a884f;
+}
+
+/* =============================================================================
+   Base Button
+   ========================================================================== */
+
+.button {
+    border: 1px solid #dbeadc;
+    color: #333;
+    background-color: #ececec;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#b5ddb8));
+    background-image: -moz-linear-gradient(#f4f4f4, #b5ddb8);
+    background-image: -ms-linear-gradient(#f4f4f4, #b5ddb8);
+    background-image: -o-linear-gradient(#f4f4f4, #b5ddb8);
+    background-image: linear-gradient(#f4f4f4, #b5ddb8);
+    text-shadow: 0 0 0 0 !important;
+}
+
+.button:hover,
+.button:focus,
+.button:active,
+.button.active {
+    border-color: #4a884f;
+    border-bottom-color: #4a884f;
+    text-shadow: 0 0 0 0 !important;
+    color: #fff;
+    background-color: #4a884f;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b5ddb8), to(#4a884f));
+    background-image: -moz-linear-gradient(#b5ddb8, #4a884f);
+    background-image: -o-linear-gradient(#b5ddb8, #4a884f);
+    background-image: linear-gradient(#b5ddb8, #4a884f);
+}
+
+.button:disabled {
+    border-color: #5C745E;
+    border-bottom-color: #5C745E;
+    text-shadow: 0 0 0 0 !important;
+    color: #fff;
+    background-color: #5C745E;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#C2DBC4), to(#5C745E));
+    background-image: -moz-linear-gradient(#C2DBC4, #5C745E);
+    background-image: -o-linear-gradient(#C2DBC4, #5C745E);
+    background-image: linear-gradient(#C2DBC4, #5C745E);
+    cursor: progress;
+}

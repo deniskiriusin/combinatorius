@@ -1,0 +1,4 @@
+Created-By: Denis Kiriusin (deniskir@gmail.com)
+Name: com/dksoftware/combo
+Sealed: true
+Class-Path: commons-io-2.4.jar commons-codec-1.9.jar

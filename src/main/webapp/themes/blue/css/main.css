@@ -1,0 +1,76 @@
+body {
+	background: #655c77;
+}
+
+body, h1, a:link, a:visited, a:active {
+	color: #aecbcf;
+}
+
+div#get {
+	background: #4f475b;
+}
+
+div#tree, div.outer {
+	background: #2c2437;
+}
+
+div#help {
+	background-color: transparent;
+}
+
+div#help span.features {
+	color: #d3d7cf;
+}
+
+div.response_name_div h3 > i {
+	margin-left: 20px;
+	color: #655c77;
+}
+
+.highlighted {
+	background-color: #655c77;
+}
+
+/* =============================================================================
+   Base Button
+   ========================================================================== */
+
+.button {
+    border: 1px solid #dbeadc;
+    color: #333;
+    background-color: #ececec;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#aecbcf));
+    background-image: -moz-linear-gradient(#f4f4f4, #aecbcf);
+    background-image: -ms-linear-gradient(#f4f4f4, #aecbcf);
+    background-image: -o-linear-gradient(#f4f4f4, #aecbcf);
+    background-image: linear-gradient(#f4f4f4, #aecbcf);
+    text-shadow: 0 0 0 0 !important;
+}
+
+.button:hover,
+.button:focus,
+.button:active,
+.button.active {
+    border-color: #655c77;
+    border-bottom-color: #655c77;
+    text-shadow: 0 0 0 0 !important;
+    color: #fff;
+    background-color: #655c77;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#aecbcf), to(#655c77));
+    background-image: -moz-linear-gradient(#aecbcf, #655c77);
+    background-image: -o-linear-gradient(#aecbcf, #655c77);
+    background-image: linear-gradient(#aecbcf, #655c77);
+}
+
+.button:disabled {
+    border-color: #585363;
+    border-bottom-color: #585363;
+    text-shadow: 0 0 0 0 !important;
+    color: #fff;
+    background-color: #585363;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ABBDBF), to(#585363));
+    background-image: -moz-linear-gradient(#ABBDBF, #585363);
+    background-image: -o-linear-gradient(#ABBDBF, #585363);
+    background-image: linear-gradient(#ABBDBF, #585363);
+    cursor: progress;
+}
