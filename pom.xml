@@ -58,7 +58,8 @@
 		<skip>false</skip>
 		<stories>**/CombinatoriusStories.java</stories>
 		<browser>chrome</browser>
-		<chromeDriver>src/test/resources/webdrivers/chromedriver</chromeDriver> 
+		<chromeDriver>src/test/resources/webdrivers/chromedriver</chromeDriver>
+		<ieDriverServer>src/test/resources/webdrivers/IEDriverServer.exe</ieDriverServer> 
 	</properties>
 
 	<dependencyManagement>
@@ -281,7 +282,7 @@
 							<systemProperties>
 								<browser>${browser}</browser>
 								<webdriver.chrome.driver>${chromeDriver}</webdriver.chrome.driver>
-								<webdriver.ie.driver><!-- TODO --></webdriver.ie.driver>
+								<webdriver.ie.driver>${ieDriverServer}</webdriver.ie.driver>
 							</systemProperties>
 							<executorsClass>org.jbehave.core.embedder.executors.SameThreadExecutors</executorsClass>
 						</configuration>
