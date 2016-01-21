@@ -38,6 +38,10 @@
 	left: 0;
 }
 
+.tree ul li.last-child:after {
+	height: 10px;
+}
+
 .tree ul li:last-child:after {
 	height: 10px;
 }
