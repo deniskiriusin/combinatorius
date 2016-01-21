@@ -21,7 +21,7 @@ public class LifecycleSteps extends PerStoriesWebDriverSteps {
     }
 
     @BeforeScenario
-    public void emptyCart() {
+    public void deleteCookies() {
         try {
         	System.out.println("Deleting cookies");
             webDriverProvider.get().manage().deleteCookieNamed("combinatorius.theme");
