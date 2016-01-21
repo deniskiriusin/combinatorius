@@ -107,17 +107,17 @@
 					<div class="tree">
 					  <ul>
 					    <!-- web-app -->
-					    <li><i class="fa fa-folder-open-o"></i><a class="node">WebApp</a>
+					    <li class="last-child"><i class="fa fa-folder-open-o"></i><a class="node">WebApp</a>
 					      <ul>
 					        <!-- css -->
 					        <li><i class="fa fa-folder-open-o"></i><a>css</a>
 					          <ul>
 					            <li><i class="fa fa-folder-o"></i><a>main.css</a></li>
-					            <li><i class="fa fa-folder-o"></i><a>buttons.css</a>
+					            <li class="last-child"><i class="fa fa-folder-o"></i><a>buttons.css</a>
 					            	<ul>
-					            		<li><i class="fa fa-folder-open-o"></i><a class="node">layout</a>
+					            		<li class="last-child"><i class="fa fa-folder-open-o"></i><a class="node">layout</a>
 					            			<ul>
-					            				<li><i class="fa fa-folder-o"></i><a>layout.css</a></li>
+					            				<li class="last-child"><i class="fa fa-folder-o"></i><a>layout.css</a></li>
 					            				<!-- add CSS file -->
 					            			</ul>
 					            		</li>
@@ -127,39 +127,39 @@
 					        </li>
 					        <li><i class="fa fa-folder-open-o"></i><a>extra_css</a>
 						        <ul>
-						        	<li><i class="fa fa-folder-o"></i><a>extra1.css</a></li>
+						        	<li class="last-child"><i class="fa fa-folder-o"></i><a>extra1.css</a></li>
 						        </ul>
 					        </li>
 					        <!-- js -->
 					        <li><i class="fa fa-folder-open-o"></i><a>js</a>
 					          <ul>
 					            <li><i class="fa fa-folder-o"></i><a>jquery-ui.js</a></li>
-					            <li><i class="fa fa-folder-o"></i><a>custom.js</a></li>
+					            <li class="last-child"><i class="fa fa-folder-o"></i><a>custom.js</a></li>
 					            <!-- add JS file -->
 					          </ul>
 					        </li>
 					        <li><i class="fa fa-folder-open-o"></i><a>extra_js</a>
 					          <ul>
-					            <li><i class="fa fa-folder-o"></i><a>extra1.js</a></li>
+					            <li class="last-child"><i class="fa fa-folder-o"></i><a>extra1.js</a></li>
 					            <!-- add JS file -->
 					          </ul>
 					        </li>
-					        <li><i class="fa fa-folder-open-o"></i><a>themes</a>
+					        <li class="last-child"><i class="fa fa-folder-open-o"></i><a>themes</a>
 						        <ul>
 						        	<li><i class="fa fa-folder-open-o"></i><a>blue</a>
 						        		<ul>
-						        			<li><i class="fa fa-folder-open-o"></i><a>css</a>
+						        			<li class="last-child"><i class="fa fa-folder-open-o"></i><a>css</a>
 						        				<ul>
-						        					<li><i class="fa fa-folder-o"></i><a>main.css</a></li>
+						        					<li class="last-child"><i class="fa fa-folder-o"></i><a>main.css</a></li>
 						        				</ul>
 						        			</li>
 						        		</ul>
 						        	</li>
-						        	<li><i class="fa fa-folder-open-o"></i><a>green</a>
+						        	<li class="last-child"><i class="fa fa-folder-open-o"></i><a>green</a>
 						        		<ul>
-						        			<li><i class="fa fa-folder-open-o"></i><a>css</a>
+						        			<li class="last-child"><i class="fa fa-folder-open-o"></i><a>css</a>
 						        				<ul>
-						        					<li><i class="fa fa-folder-o"></i><a>main.css</a></li>
+						        					<li class="last-child"><i class="fa fa-folder-o"></i><a>main.css</a></li>
 						        				</ul>
 						        			</li>
 						        		</ul>
