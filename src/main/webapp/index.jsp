@@ -248,7 +248,7 @@
 			var ul = getDirectoryTreeUL(event);
 			var i = $('<i></i>').addClass('fa fa-folder-o');
 			var a = $('<a>extra2.' + event.data.obj.type + '</a>').addClass('highlighted').fadeIn(1500);
-			var li = $('<li></li>').fadeIn(3000);
+			var li = $('<li></li>').fadeIn(1000);
 			li.append(i).append(a);
 			ul.append(li);
 		}
