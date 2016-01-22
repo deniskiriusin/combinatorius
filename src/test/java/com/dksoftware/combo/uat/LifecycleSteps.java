@@ -30,4 +30,13 @@ public class LifecycleSteps extends PerStoriesWebDriverSteps {
             e.printStackTrace();
         }
     }
+    
+    @BeforeScenario
+    public void maximizeWindow() {
+        try {
+            webDriverProvider.get().manage().window().maximize();
+        } catch (WebDriverException e) {
+            e.printStackTrace();
+        }
+    }
 }

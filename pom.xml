@@ -112,7 +112,7 @@
 					</executions>
 					<configuration>
 						<archive>
-							<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+							<manifestFile>${project.basedir}/src/main/resources/META-INF/MANIFEST.MF</manifestFile>
 							<index>true</index>
 							<manifest>
 								<addClasspath>false</addClasspath>
@@ -172,17 +172,17 @@
 
 		<resources>
 			<resource>
-				<directory>${basedir}/src/main/resources</directory>
+				<directory>${project.basedir}/src/main/resources</directory>
 				<filtering>false</filtering>
 			</resource>
 		</resources>
 		<testResources>
 			<testResource>
-				<directory>${basedir}/src/test/stories</directory>
+				<directory>${project.basedir}/src/test/stories</directory>
 				<filtering>false</filtering>
 			</testResource>
 			<testResource>
-				<directory>${basedir}/src/test/resources</directory>
+				<directory>${project.basedir}/src/test/resources</directory>
 				<filtering>false</filtering>
 			</testResource>
 		</testResources>
