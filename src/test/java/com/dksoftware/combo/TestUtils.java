@@ -23,7 +23,7 @@ import java.util.Set;
 import org.mockito.Mockito;
 
 public class TestUtils {
-
+	
 	static final String LOCALHOST = "localhost";
 	static final String EXPECTED_ETAG = "8effce7dc7eabc4dc38928f832ad2d28";
 	static final String URL_RESOURCES = "extra_css/extra1.css,extra_css/extra2.css";

@@ -47,7 +47,7 @@ public class CombinatoriusStories extends JUnitStories {
 	private PageFactory pageFactory = new PageFactory(driverProvider);
 	private PendingStepStrategy pendingStepStrategy = new FailingUponPendingStep();
 	private CrossReference crossReference = new CrossReference().withJsonOnly().withPendingStepStrategy(pendingStepStrategy) .withOutputAfterEachStory(true).excludingStoriesWithNoExecutedScenarios(true);
-	private ContextView contextView = new LocalFrameContextView().sized(640, 120);
+	private ContextView contextView = new LocalFrameContextView().sized(640, 80);
 	private SeleniumContext seleniumContext = new SeleniumContext();
 	private SeleniumStepMonitor stepMonitor = new SeleniumStepMonitor(contextView, seleniumContext, new SilentStepMonitor());
 	private Format[] formats = new Format[] { new SeleniumContextOutput(seleniumContext), CONSOLE, WEB_DRIVER_HTML };

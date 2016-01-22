@@ -17,7 +17,6 @@
 		</developer>
 	</developers>
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mockito.version>1.8.5</mockito.version>
@@ -59,7 +58,9 @@
 		<stories>**/CombinatoriusStories.java</stories>
 		<browser>chrome</browser>
 		<chromeDriver>${project.basedir}/src/test/resources/webdrivers/chromedriver</chromeDriver>
-		<ieDriverServer>${project.basedir}/src/test/resources/webdrivers/IEDriverServer.exe</ieDriverServer> 
+		<ieDriverServer>${project.basedir}/src/test/resources/webdrivers/IEDriverServer.exe</ieDriverServer>
+		<contextPath>/combinatorius</contextPath>
+		<jetty.port>9093</jetty.port>
 	</properties>
 
 	<dependencyManagement>
@@ -226,9 +227,14 @@
 					<systemPropertiesFile>${jettyProperties}</systemPropertiesFile>
 					<jettyConfig>${jettyConfig}</jettyConfig>
 					<scope>test</scope>
-					<webApp>
-						<contextPath>/</contextPath>
-					</webApp>
+					<webAppConfig>
+						<contextPath>${contextPath}</contextPath>
+					</webAppConfig>
+					<systemProperties>
+						<properties>
+							<jetty.port>${jetty.port}</jetty.port>
+						</properties>
+					</systemProperties>
 				</configuration>
 				<executions>
 					<execution>

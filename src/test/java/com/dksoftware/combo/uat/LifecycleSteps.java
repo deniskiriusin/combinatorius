@@ -6,6 +6,11 @@
 
 package com.dksoftware.combo.uat;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.jbehave.core.annotations.AfterStories;
 import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.web.selenium.PerStoriesWebDriverSteps;
 import org.jbehave.web.selenium.WebDriverProvider;
@@ -34,9 +39,17 @@ public class LifecycleSteps extends PerStoriesWebDriverSteps {
     @BeforeScenario
     public void maximizeWindow() {
         try {
-            webDriverProvider.get().manage().window().maximize();
+            //webDriverProvider.get().manage().window().maximize();
         } catch (WebDriverException e) {
             e.printStackTrace();
         }
+    }
+    
+    @AfterStories
+    public void clearCache() throws IOException {
+    	File cssCacheDir = new File("src/main/webapp/css_cache");
+    	File jsCacheDir = new File("src/main/webapp/js_cache");
+    	FileUtils.cleanDirectory(cssCacheDir);
+    	FileUtils.cleanDirectory(jsCacheDir);
     }
 }

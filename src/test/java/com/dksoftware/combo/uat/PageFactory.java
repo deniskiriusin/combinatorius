@@ -21,9 +21,17 @@ public class PageFactory {
     public PageFactory(WebDriverProvider webDriverProvider) {
         this.webDriverProvider = webDriverProvider;
         try {
+        	String contextPath = System.getProperty("contextPath");
+        	String jettyPort = System.getProperty("jetty.port");
 			properties = PageFactory.loadPropertiesFromClasspath("jetty.properties");
+			if (contextPath == null) {
+				contextPath = properties.getProperty("contextPath");
+        	}
+			if (jettyPort == null) {
+				jettyPort = properties.getProperty("jetty.port");
+        	}
 			mainUrl += properties.getProperty("jetty.schema") + "://" + properties.getProperty("jetty.host") 
-				+ ":" + properties.getProperty("jetty.port") + "/combinatorius/index.jsp";
+				+ ":" + jettyPort + (contextPath.endsWith("/") ? contextPath : contextPath + "/") + "index.jsp";
 		} catch (IOException e) {
 			throw new RuntimeException("Error loading [jetty.properties]: " + e);
 		}

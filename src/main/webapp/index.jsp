@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="https://github.com/deniskiriusin/combinatorius" prefix="cb" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page session="false" %>
 
 <html>
@@ -10,7 +11,16 @@
 <meta http-equiv="Cache-Control" content="no-cache">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
-<c:set var="path" scope="page" value="/combinatorius/combo/"/>
+<c:set var="contextPath" scope="page"><%= System.getProperty("contextPath") %></c:set>
+
+<c:choose>
+	<c:when test="${fn:endsWith(contextPath, '/')}">
+		<c:set var="path" scope="page" value="${contextPath}combo/"/>
+	</c:when>
+	<c:otherwise>
+		<c:set var="path" scope="page" value="${contextPath}/combo/"/>
+	</c:otherwise>
+</c:choose>
 <c:set var="theme" scope="page" value="blue"/>
 <c:set var="resources" scope="page" value="extra_css/extra1.css"/>
 
