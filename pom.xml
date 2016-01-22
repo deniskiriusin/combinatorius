@@ -60,7 +60,6 @@
 		<chromeDriver>${project.basedir}/src/test/resources/webdrivers/chromedriver</chromeDriver>
 		<ieDriverServer>${project.basedir}/src/test/resources/webdrivers/IEDriverServer.exe</ieDriverServer>
 		<contextPath>/combinatorius</contextPath>
-		<jetty.port>9093</jetty.port>
 	</properties>
 
 	<dependencyManagement>
@@ -230,11 +229,6 @@
 					<webAppConfig>
 						<contextPath>${contextPath}</contextPath>
 					</webAppConfig>
-					<systemProperties>
-						<properties>
-							<jetty.port>${jetty.port}</jetty.port>
-						</properties>
-					</systemProperties>
 				</configuration>
 				<executions>
 					<execution>
