@@ -78,7 +78,9 @@ public class UIControllerFilter implements Filter {
 			try {
 				UIEvent event = getEventFromJSON(event_json);
 				EventHandlerStrategy strategy = getSelectedStrategy(event);
-				strategy.handleEvent(event.getType());
+				if (strategy != null) {
+					strategy.handleEvent(event.getType());
+				}
 			} catch(Exception e) {
 				System.out.println(e);
 			}
