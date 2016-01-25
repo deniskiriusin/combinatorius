@@ -47,9 +47,9 @@ public class UIControllerFilter implements Filter {
 	 * </pre> 
 	 */
 	enum UIEventType {
-		ADD_FILE,
-		MODIFY_FILE,
-		REMOVE_FILE;
+		add_file,
+		modify_file,
+		remove_file;
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class UIControllerFilter implements Filter {
 				UIEvent event = getEventFromJSON(event_json);
 				EventHandlerStrategy strategy = getSelectedStrategy(event);
 				if (strategy != null) {
-					strategy.handleEvent(event.getType());
+					strategy.handleEvent(event);
 				}
 			} catch(Exception e) {
 				System.out.println(e);
@@ -102,29 +102,29 @@ public class UIControllerFilter implements Filter {
 
 	EventHandlerStrategy getSelectedStrategy(UIEvent event) {
 		EventHandlerStrategy strategy = null;
-		if (event.getName() == UIEventType.ADD_FILE) {
+		if (event.getEventType() == UIEventType.add_file) {
 			strategy = addFileStrategy;
-		} else if (event.getName() == UIEventType.REMOVE_FILE) {
+		} else if (event.getEventType() == UIEventType.remove_file) {
 			strategy = removeFileStrategy;
-		} else if (event.getName() == UIEventType.MODIFY_FILE) {
+		} else if (event.getEventType() == UIEventType.modify_file) {
 			strategy = modifyFileStrategy;
 		} else {
-			throw new IllegalArgumentException("No event handler for [" + event.getName() + "] event type exists.");
+			throw new IllegalArgumentException("No event handler for [" + event.getEventType() + "] event type exists.");
 		}
 		return strategy;
 	}
 
 	interface EventHandlerStrategy {
-		void handleEvent(String type) throws IOException;
+		void handleEvent(UIEvent event) throws IOException;
 	}
 
 	static class AddFileStrategy implements EventHandlerStrategy {
 		@Override
-		public void handleEvent(String type) throws IOException {
+		public void handleEvent(UIEvent event) throws IOException {
 			String path = "";
-			if (type.equalsIgnoreCase("css")) {
+			if (event.getMimeType() == MimeType.css) {
 				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_css" + File.separator + "extra2.css";
-			} else if (type.equalsIgnoreCase("js")) {
+			} else if (event.getMimeType() == MimeType.js) {
 				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_js" + File.separator + "extra2.js";
 			}
 			FileUtils.touch(CIOUtils.getLocalFile(path));
@@ -133,11 +133,11 @@ public class UIControllerFilter implements Filter {
 
 	static class RemoveFileStrategy implements EventHandlerStrategy {
 		@Override
-		public void handleEvent(String type) throws IOException {
+		public void handleEvent(UIEvent event) throws IOException {
 			String path = "";
-			if (type.equalsIgnoreCase("css")) {
+			if (event.getMimeType() == MimeType.css) {
 				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_css" + File.separator + "extra1.css";
-			} else if (type.equalsIgnoreCase("js")) {
+			} else if (event.getMimeType() == MimeType.js) {
 				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_js" + File.separator + "extra1.js";
 			}
 			FileUtils.touch(CIOUtils.getLocalFile(path));
@@ -146,11 +146,11 @@ public class UIControllerFilter implements Filter {
 	
 	static class ModifyFileStrategy implements EventHandlerStrategy {
 		@Override
-		public void handleEvent(String type) throws IOException {
+		public void handleEvent(UIEvent event) throws IOException {
 			String path = "";
-			if (type.equalsIgnoreCase("css")) {
+			if (event.getMimeType() == MimeType.css) {
 				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "layout" + File.separator + "layout.css";
-			} else if (type.equalsIgnoreCase("js")) {
+			} else if (event.getMimeType() == MimeType.js) {
 				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "jquery-ui.js";
 			}
 			FileUtils.touch(CIOUtils.getLocalFile(path));
@@ -162,46 +162,46 @@ public class UIControllerFilter implements Filter {
 	 * based <tt>combinatorius.event</tt> cookie value.
 	 */
 	static class UIEvent {
-		private UIEventType name = null;
-		private String type = null;
+		private UIEventType eventType = null;
+		private MimeType mimeType = null;
 		private volatile Object lock1 = new Object();
 		private volatile Object lock2 = new Object();
-
-		public UIEventType getName() {
+		
+		public UIEventType getEventType() {
 			synchronized (lock1) {
-				return name;
+				return eventType;
 			}
 		}
-
-		public void setName(UIEventType name) {
+		
+		public void setEventType(UIEventType eventType) {
 			synchronized (lock1) {
-				this.name = name;
+				this.eventType = eventType;
 			}
 		}
-
-		public String getType() {
+		
+		public MimeType getMimeType() {
 			synchronized (lock2) {
-				return type;
+				return mimeType;
 			}
 		}
-
-		public void setType(String eventType) {
+		
+		public void setMimeType(MimeType mimeType) {
 			synchronized (lock2) {
-				type = eventType;
+				this.mimeType = mimeType;
 			}
 		}
 
 		@Override
 		public String toString() {
-			return "UIEvent [name=" + name + ", type=" + type + "]";
+			return "UIEvent [eventType=" + eventType + ", mimeType=" + mimeType + "]";
 		}
 
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((name == null) ? 0 : name.hashCode());
-			result = prime * result + ((type == null) ? 0 : type.hashCode());
+			result = prime * result + ((eventType == null) ? 0 : eventType.hashCode());
+			result = prime * result + ((mimeType == null) ? 0 : mimeType.hashCode());
 			return result;
 		}
 
@@ -214,12 +214,9 @@ public class UIControllerFilter implements Filter {
 			if (getClass() != obj.getClass())
 				return false;
 			UIEvent other = (UIEvent) obj;
-			if (name != other.name)
+			if (eventType != other.eventType)
 				return false;
-			if (type == null) {
-				if (other.type != null)
-					return false;
-			} else if (!type.equals(other.type))
+			if (mimeType != other.mimeType)
 				return false;
 			return true;
 		}

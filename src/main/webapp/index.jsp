@@ -234,8 +234,8 @@
 
 		function setCookies(event, name) {
 			var object = {};
-			object['name'] = name;
-			object['type'] = event.data.obj.type;
+			object['eventType'] = name;
+			object['mimeType'] = event.data.obj.type;
 			$.cookie('combinatorius.event', JSON.stringify(object));
 		}
 
@@ -251,7 +251,7 @@
 		function addFile(event) {
 			replaceURL(event);
 			// make request
-			setCookies(event, 'ADD_FILE');
+			setCookies(event, 'add_file');
 			makeRequest(event);
 			// update directory tree
 			var ul = getDirectoryTreeUL(event);
@@ -265,7 +265,7 @@
 		function removeFile(event) {
 			replaceURL(event);
 			// make request
-			setCookies(event, 'REMOVE_FILE');
+			setCookies(event, 'remove_file');
 			makeRequest(event);
 			// update directory tree
 			var ul = getDirectoryTreeUL(event);
@@ -286,7 +286,7 @@
 
 		function modifyFile(event) {
 			$(this).timedDisable(2000);
-			setCookies(event, 'MODIFY_FILE');
+			setCookies(event, 'modify_file');
 			makeRequest(event);
 			var fileName = 'layout.css';
 			if (event.data.obj.type === 'js') {

@@ -76,33 +76,33 @@ public class UIControllerFilterTest {
 		Mockito.when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 		e1 = new UIEvent();
 		e2 = new UIEvent();
-		e1.setName(UIEventType.ADD_FILE);
-		e1.setType("testType");
-		e2.setName(UIEventType.ADD_FILE);
-		e2.setType("testType");
+		e1.setEventType(UIEventType.add_file);
+		e1.setMimeType(MimeType.css);
+		e2.setEventType(UIEventType.add_file);
+		e2.setMimeType(MimeType.css);
 	}
 	
 	@Test
 	public void testModifyFile() throws IOException, ServletException, URISyntaxException {
-		Mockito.when(cookie.getValue()).thenReturn(URLEncoder.encode("{\"name\":\"MODIFY_FILE\",\"type\":\"css\"}", "UTF-8"));
+		Mockito.when(cookie.getValue()).thenReturn(URLEncoder.encode("{\"eventType\":\"modify_file\",\"mimeType\":\"css\"}", "UTF-8"));
 		filter.doFilter(request, response, chain);
-		Mockito.verify(modifyFileStrategy).handleEvent(Mockito.anyString());
+		Mockito.verify(modifyFileStrategy).handleEvent(Mockito.any(UIEvent.class));
 		Mockito.verifyZeroInteractions(addFileStrategy, removeFileStrategy);
 	}
 	
 	@Test
 	public void testAddFile() throws IOException, ServletException, URISyntaxException {
-		Mockito.when(cookie.getValue()).thenReturn(URLEncoder.encode("{\"name\":\"ADD_FILE\",\"type\":\"css\"}", "UTF-8"));
+		Mockito.when(cookie.getValue()).thenReturn(URLEncoder.encode("{\"eventType\":\"add_file\",\"mimeType\":\"css\"}", "UTF-8"));
 		filter.doFilter(request, response, chain);
-		Mockito.verify(addFileStrategy).handleEvent(Mockito.anyString());
+		Mockito.verify(addFileStrategy).handleEvent(Mockito.any(UIEvent.class));
 		Mockito.verifyZeroInteractions(modifyFileStrategy, removeFileStrategy);
 	}
 	
 	@Test
 	public void testRemoveFile() throws IOException, ServletException, URISyntaxException {
-		Mockito.when(cookie.getValue()).thenReturn(URLEncoder.encode("{\"name\":\"REMOVE_FILE\",\"type\":\"css\"}", "UTF-8"));
+		Mockito.when(cookie.getValue()).thenReturn(URLEncoder.encode("{\"eventType\":\"remove_file\",\"mimeType\":\"css\"}", "UTF-8"));
 		filter.doFilter(request, response, chain);
-		Mockito.verify(removeFileStrategy).handleEvent(Mockito.anyString());
+		Mockito.verify(removeFileStrategy).handleEvent(Mockito.any(UIEvent.class));
 		Mockito.verifyZeroInteractions(modifyFileStrategy, addFileStrategy);
 	}
 	
@@ -113,14 +113,14 @@ public class UIControllerFilterTest {
 
 	@Test
 	public void testToString() {
-		Assert.assertTrue(e1.toString().equals("UIEvent [name=ADD_FILE, type=testType]"));
+		Assert.assertTrue(e1.toString().equals("UIEvent [eventType=add_file, mimeType=css]"));
 	}
 	
 	@Test
 	public void testMimeTypeEnumValuesAreCorrect() {
-		Assert.assertTrue(UIEventType.ADD_FILE != null);
-		Assert.assertTrue(UIEventType.MODIFY_FILE != null);
-		Assert.assertTrue(UIEventType.REMOVE_FILE != null);
+		Assert.assertTrue(UIEventType.add_file != null);
+		Assert.assertTrue(UIEventType.modify_file != null);
+		Assert.assertTrue(UIEventType.remove_file != null);
 		Assert.assertEquals(UIEventType.values().length, 3);
 	}
 
