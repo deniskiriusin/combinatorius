@@ -72,7 +72,7 @@ public class UIControllerFilterTest {
 		Mockito.when(filterConfig.getServletContext()).thenReturn(servletContext);
 		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/main/webapp/css");
 		Mockito.when(properties.getProperty(Property.JS_DIR.getName())).thenReturn("src/main/webapp/js");
-		Mockito.when(cookie.getName()).thenReturn("combinatorius.event");
+		Mockito.when(cookie.getName()).thenReturn(UIControllerFilter.combinatoriusEvent);
 		Mockito.when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 		e1 = new UIEvent();
 		e2 = new UIEvent();

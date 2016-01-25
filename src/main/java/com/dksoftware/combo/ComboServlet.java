@@ -36,7 +36,7 @@ public class ComboServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -4603538340120848220L;
-
+	public static final String combinatoriusTheme = "combinatorius.theme";
 	static final String propertiesFileName = "combinatorius.properties";
 	// thread-local RequestDetails object
 	private static ThreadLocal<RequestDetails> requestDetails = new ThreadLocal<RequestDetails>();
@@ -209,7 +209,7 @@ public class ComboServlet extends HttpServlet {
 			throw new IllegalArgumentException("Error getting files from '" + dir.getAbsolutePath() + "' directory.");
 		}
 		// get files specified via 'theme' URL parameter
-		if (requestDetails.getThemeName() != null || CookieUtils.getCookie(request, "combinatorius.theme") != null) {
+		if (requestDetails.getThemeName() != null || CookieUtils.getCookie(request, combinatoriusTheme) != null) {
 			String themeName = getThemeName(request, requestDetails);
 			try {
 				fileSet.addAll(CIOUtils.getUnmodifiableCollectionOfFiles(getThemesDir(themeName),
@@ -240,7 +240,7 @@ public class ComboServlet extends HttpServlet {
 	 */
 	String getThemeName(HttpServletRequest request, final RequestDetails requestDetails) {
 		String themeName = null;
-		Cookie cookie = CookieUtils.getCookie(request, "combinatorius.theme");
+		Cookie cookie = CookieUtils.getCookie(request, combinatoriusTheme);
 		if (cookie != null) {
 			themeName = cookie.getValue();
 		} else {

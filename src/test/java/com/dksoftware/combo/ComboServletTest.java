@@ -211,7 +211,7 @@ public class ComboServletTest {
 
 	@Test
 	public void testGetThemeName() {
-		Mockito.when(cookie.getName()).thenReturn("combinatorius.theme");
+		Mockito.when(cookie.getName()).thenReturn(ComboServlet.combinatoriusTheme);
 		Mockito.when(cookie.getValue()).thenReturn("green");
 		Mockito.when(cookie.getDomain()).thenReturn("localhost");
 		Mockito.when(request.getCookies()).thenReturn(new Cookie[] { cookie });

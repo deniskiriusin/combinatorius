@@ -181,7 +181,7 @@ public class ComboHelperTest {
 	@Test
 	public void testGetRequestDetailsWithThemeCookieSet() throws IOException {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL_NO_THEME));
-		Cookie cookie = new Cookie("combinatorius.theme", "green");
+		Cookie cookie = new Cookie(ComboServlet.combinatoriusTheme, "green");
 		Mockito.when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 		RequestDetails requestDetails = ComboHelper.getInstance().getRequestDetails(request);
 		Assert.assertTrue("RequestDetails.type should be 'css'", requestDetails.getMimeType() == MimeType.css);

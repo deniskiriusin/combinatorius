@@ -137,7 +137,7 @@ class ComboHelper {
 		final String resources = qsParams.get("resources");
 		String theme = qsParams.get("theme");
 		if (theme == null) {
-			Cookie cookie = CookieUtils.getCookie(request, "combinatorius.theme");
+			Cookie cookie = CookieUtils.getCookie(request, ComboServlet.combinatoriusTheme);
 			if (cookie != null && cookie.getValue() != null) {
 				theme = cookie.getValue().trim();
 			}

@@ -16,6 +16,9 @@ import org.jbehave.web.selenium.PerStoriesWebDriverSteps;
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.WebDriverException;
 
+import com.dksoftware.combo.ComboServlet;
+import com.dksoftware.combo.UIControllerFilter;
+
 public class LifecycleSteps extends PerStoriesWebDriverSteps {
 
     private final WebDriverProvider webDriverProvider;
@@ -29,8 +32,8 @@ public class LifecycleSteps extends PerStoriesWebDriverSteps {
     public void deleteCookies() {
         try {
         	System.out.println("Deleting cookies");
-            webDriverProvider.get().manage().deleteCookieNamed("combinatorius.theme");
-            webDriverProvider.get().manage().deleteCookieNamed("combinatorius.event");
+            webDriverProvider.get().manage().deleteCookieNamed(ComboServlet.combinatoriusTheme);
+            webDriverProvider.get().manage().deleteCookieNamed(UIControllerFilter.combinatoriusEvent);
         } catch (WebDriverException e) {
             e.printStackTrace();
         }

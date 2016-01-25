@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 public class UIControllerFilter implements Filter {
 
 	static Properties properties;
+	public static final String combinatoriusEvent = "combinatorius.event";
 	
 	private ModifyFileStrategy modifyFileStrategy;
 	private AddFileStrategy addFileStrategy;
@@ -41,9 +42,9 @@ public class UIControllerFilter implements Filter {
 	 * UI event type: <br>
 	 * 
 	 * <pre>
-	 * 1) ADD_FILE
-	 * 2) MODIFY_FILE
-	 * 2) REMOVE_FILE
+	 * 1) add_file
+	 * 2) modify_file
+	 * 2) remove_file
 	 * </pre> 
 	 */
 	enum UIEventType {
@@ -72,7 +73,7 @@ public class UIControllerFilter implements Filter {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
-		Cookie cookie = CookieUtils.getCookie(httpServletRequest, "combinatorius.event");
+		Cookie cookie = CookieUtils.getCookie(httpServletRequest, combinatoriusEvent);
 		if (cookie != null && cookie.getValue() != null) {
 			final String event_json = cookie.getValue();
 			try {
