@@ -74,10 +74,10 @@ public class ComboServletTest {
 		Mockito.when(requestDetails.get()).thenReturn(requestDetailsObject);
 		
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL));
-		Mockito.when(properties.getProperty(CProperties.CSS_DIR.getName())).thenReturn("src/test/resources/css");
-		Mockito.when(properties.getProperty(CProperties.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
-		Mockito.when(properties.getProperty(CProperties.CSS_CACHE_DIR.getName())).thenReturn("css_cache");
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Property.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
+		Mockito.when(properties.getProperty(Property.CSS_CACHE_DIR.getName())).thenReturn("css_cache");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
 	}
 
 	@After
@@ -88,7 +88,7 @@ public class ComboServletTest {
 
 	@Test
 	public void testGetFilesWithDefaultDirectoriesOnly() {
-		Mockito.when(properties.getProperty(CProperties.CSS_DIR.getName())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
 		Mockito.when(requestDetailsObject.getThemeName()).thenReturn(null);
 		Mockito.when(requestDetailsObject.getResources()).thenReturn(null);
 
@@ -99,8 +99,8 @@ public class ComboServletTest {
 
 	@Test
 	public void testGetFilesWithThemes() {
-		Mockito.when(properties.getProperty(CProperties.CSS_DIR.getName())).thenReturn("src/test/resources/css");
-		Mockito.when(properties.getProperty(CProperties.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Property.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
 		Mockito.when(requestDetailsObject.getResources()).thenReturn(null);
 
 		Collection<File> files = servlet.getFiles(request, requestDetailsObject);
@@ -112,8 +112,8 @@ public class ComboServletTest {
 	@Test
 	public void testGetFilesWithWrongTheme() {
 		Mockito.when(requestDetailsObject.getThemeName()).thenReturn("wrong-theme");
-		Mockito.when(properties.getProperty(CProperties.CSS_DIR.getName())).thenReturn("src/test/resources/css");
-		Mockito.when(properties.getProperty(CProperties.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Property.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
 		Mockito.when(requestDetailsObject.getResources()).thenReturn(null);
 
 		thrown.expect(IllegalArgumentException.class);
@@ -126,7 +126,7 @@ public class ComboServletTest {
 
 	@Test
 	public void testGetFilesWithIcorrectResourcesDir() {
-		Mockito.when(properties.getProperty(CProperties.CSS_DIR.getName())).thenReturn("src/test/resources/wrong_dir");
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/wrong_dir");
 
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage(Matchers.containsString("Error getting files from"));
@@ -143,7 +143,7 @@ public class ComboServletTest {
 	
 	@Test
 	public void testDoGetWithNoCacheDir() throws ServletException, IOException {
-		Mockito.when(properties.getProperty(CProperties.CSS_CACHE_DIR.getName())).thenReturn(null);
+		Mockito.when(properties.getProperty(Property.CSS_CACHE_DIR.getName())).thenReturn(null);
 		servlet.doGet(request, response);
 		Mockito.verify(response).sendError(Mockito.eq(HttpServletResponse.SC_BAD_REQUEST), 
 				Mockito.contains("Error trying to get content:"));
@@ -151,7 +151,7 @@ public class ComboServletTest {
 	
 	@Test
 	public void testDoGetWithNoCssDir() throws ServletException, IOException {
-		Mockito.when(properties.getProperty(CProperties.CSS_DIR.getName())).thenReturn(null);
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn(null);
 
 		servlet.doGet(request, response);
 		
@@ -168,9 +168,9 @@ public class ComboServletTest {
 	@Test
 	public void testSetResponseHeaders() {
 		Mockito.when(request.getScheme()).thenReturn("non-https");
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
-		Mockito.when(properties.getProperty(CProperties.S_MAXAGE.getName())).thenReturn("31536000");
-		Mockito.when(properties.getProperty(CProperties.MAX_AGE.getName())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		Mockito.when(properties.getProperty(Property.S_MAXAGE.getName())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Property.MAX_AGE.getName())).thenReturn("31536000");
 
 		ComboServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
 
@@ -186,9 +186,9 @@ public class ComboServletTest {
 	@Test
 	public void testSetResponseHeadersHTTPS() {
 		Mockito.when(request.getScheme()).thenReturn("https");
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
-		Mockito.when(properties.getProperty(CProperties.S_MAXAGE.getName())).thenReturn("31536000");
-		Mockito.when(properties.getProperty(CProperties.MAX_AGE.getName())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		Mockito.when(properties.getProperty(Property.S_MAXAGE.getName())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Property.MAX_AGE.getName())).thenReturn("31536000");
 
 		ComboServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
 

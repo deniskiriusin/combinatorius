@@ -10,6 +10,9 @@ import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
+/**
+ * Performs translation-time validation of the {@link ComboTag} attributes. 
+ */
 public class ComboTagExtraInfo extends TagExtraInfo {
 
 	@Override

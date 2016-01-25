@@ -35,7 +35,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HelperTest {
+public class ComboHelperTest {
 
 	@Rule
 	public TemporaryFolder tp = new TemporaryFolder();
@@ -56,7 +56,7 @@ public class HelperTest {
 	@Mock
 	private Properties properties;
 	@Mock
-	private Helper helper;
+	private ComboHelper helper;
 
 	private final Set<File> mocked_files = new LinkedHashSet<File>();
 	private final Set<File> files = new LinkedHashSet<File>();
@@ -115,35 +115,35 @@ public class HelperTest {
 	@Test
 	public void testGetQueryStringParametersAlwaysReturnsMap() {
 		Assert.assertTrue("Should always return Map, never null",
-				(Helper.getInstance().getQueryStringParameters(null) instanceof Map<?, ?>));
+				(ComboHelper.getInstance().getQueryStringParameters(null) instanceof Map<?, ?>));
 	}
 
 	@Test
 	public void testGetQueryStringParameters() {
 		Assert.assertTrue("Map should contain [type->css] key-value",
-				Helper.getInstance().getQueryStringParameters(TestUtils.URL).get("type").equalsIgnoreCase("css"));
+				ComboHelper.getInstance().getQueryStringParameters(TestUtils.URL).get("type").equalsIgnoreCase("css"));
 	}
 
 	@Test(expected = ArrayIndexOutOfBoundsException.class)
 	public void testGetQueryStringParameters_ArrayIndexOutOfBoundsException() {
-		Helper.getInstance().getQueryStringParameters("/incorrect&/URL");
+		ComboHelper.getInstance().getQueryStringParameters("/incorrect&/URL");
 	}
 
 	@Test
 	public void testGenerateEtagValue() {
-		Assert.assertEquals("Etag should be correct", Helper.getInstance().generateEtagValue(mocked_files, 0L, false),
+		Assert.assertEquals("Etag should be correct", ComboHelper.getInstance().generateEtagValue(mocked_files, 0L, false),
 				"\"" + TestUtils.EXPECTED_ETAG + "\"");
 	}
 
 	@Test
 	public void testGenerateEtagValueWithCompressionEnabled() {
-		Assert.assertFalse("Etag should be different when compression enabled", Helper.getInstance()
+		Assert.assertFalse("Etag should be different when compression enabled", ComboHelper.getInstance()
 				.generateEtagValue(mocked_files, 0L, true).equals("\"" + TestUtils.EXPECTED_ETAG + "\""));
 	}
 
 	@Test
 	public void testGenerateEtagValueChangesIfLastModified() {
-		Assert.assertTrue("Etag should be differend with different last modified values", !Helper.getInstance()
+		Assert.assertTrue("Etag should be differend with different last modified values", !ComboHelper.getInstance()
 				.generateEtagValue(mocked_files, 1500000000000L, false).equals("\"" + TestUtils.EXPECTED_ETAG + "\""));
 	}
 
@@ -155,7 +155,7 @@ public class HelperTest {
 			}
 		}
 		Assert.assertTrue("Etag should be differend when file stucture has been changed or one or more files modified",
-				!Helper.getInstance().generateEtagValue(mocked_files, 0L, false)
+				!ComboHelper.getInstance().generateEtagValue(mocked_files, 0L, false)
 						.equals("\"" + TestUtils.EXPECTED_ETAG + "\""));
 	}
 
@@ -163,15 +163,15 @@ public class HelperTest {
 	public void testParseQueryString() throws IOException {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL));
 		Assert.assertTrue("Map should contain [type->css] key-value",
-				(Helper.getInstance().parseQueryString(request).get("type").equalsIgnoreCase("css")));
+				(ComboHelper.getInstance().parseQueryString(request).get("type").equalsIgnoreCase("css")));
 		Assert.assertTrue("Map should contain [theme->blue] key-value",
-				(Helper.getInstance().parseQueryString(request).get("theme").equalsIgnoreCase("blue")));
+				(ComboHelper.getInstance().parseQueryString(request).get("theme").equalsIgnoreCase("blue")));
 	}
 
 	@Test
 	public void testGetRequestDetails() throws IOException {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL));
-		RequestDetails requestDetails = Helper.getInstance().getRequestDetails(request);
+		RequestDetails requestDetails = ComboHelper.getInstance().getRequestDetails(request);
 		Assert.assertTrue("RequestDetails.type should be 'css'", requestDetails.getMimeType() == MimeType.css);
 		Assert.assertTrue(requestDetails.getResources().equals(TestUtils.URL_RESOURCES));
 		Assert.assertTrue("RequestDetails.theme should be 'blue'", requestDetails.getThemeName().equals("blue"));
@@ -183,7 +183,7 @@ public class HelperTest {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL_NO_THEME));
 		Cookie cookie = new Cookie("combinatorius.theme", "green");
 		Mockito.when(request.getCookies()).thenReturn(new Cookie[] { cookie });
-		RequestDetails requestDetails = Helper.getInstance().getRequestDetails(request);
+		RequestDetails requestDetails = ComboHelper.getInstance().getRequestDetails(request);
 		Assert.assertTrue("RequestDetails.type should be 'css'", requestDetails.getMimeType() == MimeType.css);
 		Assert.assertTrue(requestDetails.getResources().equals(TestUtils.URL_RESOURCES));
 		Assert.assertTrue("RequestDetails.theme should be 'green'", requestDetails.getThemeName().equals("green"));
@@ -193,94 +193,94 @@ public class HelperTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetRequestDetailsNeverReturnsNull() throws IOException {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(""));
-		Helper.getInstance().getRequestDetails(request);
+		ComboHelper.getInstance().getRequestDetails(request);
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testGetCombinedFileNameNeverReturnsNull() throws IOException {
 		Assert.assertTrue("getCombinedFileName() should never return null",
-				Helper.getInstance().getCombinedFileName(null, null) != null);
+				ComboHelper.getInstance().getCombinedFileName(null, null) != null);
 	}
 
 	@Test
 	public void testGetCombinedFileNameCompressionEnabled() throws IOException, URISyntaxException {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL));
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
-		RequestDetails requestDetails = Helper.getInstance().getRequestDetails(request);
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		RequestDetails requestDetails = ComboHelper.getInstance().getRequestDetails(request);
 		Assert.assertTrue("getCombinedFileName() should return 'effce7dc7eabc4dc38928f832ad2d2.css.cmb.gzip'",
-				Helper.getInstance().getCombinedFileName(requestDetails, TestUtils.EXPECTED_ETAG)
+				ComboHelper.getInstance().getCombinedFileName(requestDetails, TestUtils.EXPECTED_ETAG)
 						.equals("effce7dc7eabc4dc38928f832ad2d2.css.cmb.gzip"));
 	}
 
 	@Test
 	public void testGetCombinedFileNameCompressionDisabled() throws IOException, URISyntaxException {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL));
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("false");
-		RequestDetails requestDetails = Helper.getInstance().getRequestDetails(request);
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("false");
+		RequestDetails requestDetails = ComboHelper.getInstance().getRequestDetails(request);
 		Assert.assertTrue("getCombinedFileName() should return 'effce7dc7eabc4dc38928f832ad2d2.css.cmb'",
-				Helper.getInstance().getCombinedFileName(requestDetails, TestUtils.EXPECTED_ETAG)
+				ComboHelper.getInstance().getCombinedFileName(requestDetails, TestUtils.EXPECTED_ETAG)
 						.equals("effce7dc7eabc4dc38928f832ad2d2.css.cmb"));
 	}
 
 	@Test
 	public void testCompressConditionallyEncodingFalsePropertyTrue() throws IOException {
 		Mockito.when(response.containsHeader("Content-Encoding")).thenReturn(false);
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
 		Assert.assertTrue(
 				"Compression should be enabled when 'Content-Encoding' response header is not set and "
 						+ "prop.isCompressionEnabled property set to true",
-				Helper.getInstance().compressConditionally(bytes, response).length < 200);
+				ComboHelper.getInstance().compressConditionally(bytes, response).length < 200);
 	}
 
 	@Test
 	public void testCompressConditionallyEncodingTruePropertyTrue() throws IOException {
 		Mockito.when(response.containsHeader("Content-Encoding")).thenReturn(true);
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
 		Assert.assertTrue(
 				"Compression should be disabled when 'Content-Encoding' response header is set and "
 						+ "prop.isCompressionEnabled property set to true",
-				Helper.getInstance().compressConditionally(bytes, response).length == 700);
+				ComboHelper.getInstance().compressConditionally(bytes, response).length == 700);
 	}
 
 	@Test
 	public void testCompressConditionallyEncodingFalsePropertyFalse() throws IOException {
 		Mockito.when(response.containsHeader("Content-Encoding")).thenReturn(false);
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("false");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("false");
 		Assert.assertTrue(
 				"Compression should be disabled when 'Content-Encoding' response header is not set and "
 						+ "prop.isCompressionEnabled property set to false",
-				Helper.getInstance().compressConditionally(bytes, response).length == 700);
+				ComboHelper.getInstance().compressConditionally(bytes, response).length == 700);
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testCompressConditionallyNeverReturnsNull() throws IOException {
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
-		Helper.getInstance().compressConditionally(null, response);
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		ComboHelper.getInstance().compressConditionally(null, response);
 	}
 
 	@Test
 	public void testCompressConditionallyEncodingTruePropertyFalse() throws IOException {
 		Mockito.when(response.containsHeader("Content-Encoding")).thenReturn(true);
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("false");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("false");
 		Assert.assertTrue(
 				"Compression should be disabled when 'Content-Encoding' response header is set and "
 						+ "prop.isCompressionEnabled property set to false",
-				Helper.getInstance().compressConditionally(bytes, response).length == 700);
+				ComboHelper.getInstance().compressConditionally(bytes, response).length == 700);
 	}
 
 	@Test(expected = IOException.class)
 	public void testGetContentNeverReturnsNull() throws IOException {
-		Helper.getInstance().getContent(null, null, null, null);
+		ComboHelper.getInstance().getContent(null, null, null, null);
 	}
 
 	@Test
 	public void testGetContentReturnsActualContent() throws IOException {
-		Mockito.when(properties.getProperty(CProperties.CSS_DIR.getName())).thenReturn("src/test/resources/css");
-		Mockito.when(properties.getProperty(CProperties.CSS_CACHE_DIR.getName()))
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Property.CSS_CACHE_DIR.getName()))
 				.thenReturn("src/test/resources/css_cache");
-		Mockito.when(properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
 
-		byte[] content = Helper.getInstance().getContent(requestDetailsObject, files, TestUtils.EXPECTED_ETAG,
+		byte[] content = ComboHelper.getInstance().getContent(requestDetailsObject, files, TestUtils.EXPECTED_ETAG,
 				response);
 		Assert.assertTrue("The content length returned by the method should be higher than 10", content.length > 10);
 	}

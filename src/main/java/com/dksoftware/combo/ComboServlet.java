@@ -27,6 +27,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
+/**
+ * Main servlet class responsible of handling HTTP requests and generating responses.  
+ */
 public class ComboServlet extends HttpServlet {
 
 	/**
@@ -67,15 +70,15 @@ public class ComboServlet extends HttpServlet {
 
 		try {
 			// construct RequestDetails object from HTTP request
-			requestDetails.set(Helper.getInstance().getRequestDetails(request));
+			requestDetails.set(ComboHelper.getInstance().getRequestDetails(request));
 			// get a collection of JavaScript/CSS files
 			final Collection<File> files = getFiles(request, requestDetails.get());
 			// check if any of files have been changed since the last request
 			final long lastModified = CIOUtils.lastModifiedFile(files);
 			// generate ETag
-			final String eTag = Helper.getInstance().generateEtagValue(files, lastModified, isCompressionEnabled());
+			final String eTag = ComboHelper.getInstance().generateEtagValue(files, lastModified, isCompressionEnabled());
 			// the actual content
-			final byte[] bytes = Helper.getInstance().getContent(requestDetails.get(), files, eTag, response);
+			final byte[] bytes = ComboHelper.getInstance().getContent(requestDetails.get(), files, eTag, response);
 			// check if request or files have been modified to set proper cache headers,
 			// write the binary content out if request has been modified or send conditional
 			// response headers otherwise
@@ -137,7 +140,7 @@ public class ComboServlet extends HttpServlet {
 		if (request.getScheme().equalsIgnoreCase("https") || requestDetails.get().getVersion() > 0L) {
 			// add s-maxage to fix Apache mod_cache bug
 			// @see http://www.gossamer-threads.com/lists/apache/dev/344665
-			final String s_maxage = properties.getProperty(CProperties.S_MAXAGE.getName());
+			final String s_maxage = properties.getProperty(Property.S_MAXAGE.getName());
 			cacheProxy = "public";
 			if (s_maxage != null) {
 				cacheProxy += ", s-maxage=" + s_maxage;
@@ -155,7 +158,7 @@ public class ComboServlet extends HttpServlet {
 		// set Cache-Control header (private - instructs proxies in the path not
 		// to cache the resource,
 		// browser will still cache)
-		final String max_age = properties.getProperty(CProperties.MAX_AGE.getName());
+		final String max_age = properties.getProperty(Property.MAX_AGE.getName());
 		response.setHeader("Cache-Control", cacheProxy + (max_age != null ? (", max-age=" + max_age) : ""));
 		// Last-Modified: Tue, 15 Nov 2015 12:45:26 GMT
 		response.setDateHeader("Last-Modified", lastModified);
@@ -252,7 +255,7 @@ public class ComboServlet extends HttpServlet {
 	 * Returns default CSS directory as per <code>prop.css.dir<code> property.
 	 */
 	static File getCssDir() {
-		String cssDir = properties.getProperty(CProperties.CSS_DIR.getName());
+		String cssDir = properties.getProperty(Property.CSS_DIR.getName());
 		if (cssDir != null) {
 			cssDir = cssDir.trim();
 		} else {
@@ -266,7 +269,7 @@ public class ComboServlet extends HttpServlet {
 	 * <code> property.
 	 */
 	static File getCachedCssDir() {
-		final String cachedCssDir = properties.getProperty(CProperties.CSS_CACHE_DIR.getName()).trim();
+		final String cachedCssDir = properties.getProperty(Property.CSS_CACHE_DIR.getName()).trim();
 		return CIOUtils.getLocalFile(cachedCssDir);
 	}
 
@@ -275,7 +278,7 @@ public class ComboServlet extends HttpServlet {
 	 * <code> property.
 	 */
 	static File getJsDir() {
-		String javaScriptDir = properties.getProperty(CProperties.JS_DIR.getName());
+		String javaScriptDir = properties.getProperty(Property.JS_DIR.getName());
 		if (javaScriptDir != null) {
 			javaScriptDir = javaScriptDir.trim();
 		} else {
@@ -289,7 +292,7 @@ public class ComboServlet extends HttpServlet {
 	 * <code>prop.js.cache.dir<code> property.
 	 */
 	static File getCachedJsDir() {
-		final String javaScriptDirCacheDir = properties.getProperty(CProperties.JS_CACHE_DIR.getName()).trim();
+		final String javaScriptDirCacheDir = properties.getProperty(Property.JS_CACHE_DIR.getName()).trim();
 		return CIOUtils.getLocalFile(javaScriptDirCacheDir);
 	}
 
@@ -298,7 +301,7 @@ public class ComboServlet extends HttpServlet {
 	 * <code> property.
 	 */
 	static File getThemesDir(final String themeName) {
-		String themesDir = properties.getProperty(CProperties.THEMES_DIR.getName());
+		String themesDir = properties.getProperty(Property.THEMES_DIR.getName());
 		if (themeName != null) {
 			themesDir = themesDir.trim();
 			themesDir += (File.separator + themeName);
@@ -311,7 +314,7 @@ public class ComboServlet extends HttpServlet {
 	 * compression is enabled.
 	 */
 	static boolean isCompressionEnabled() {
-		final String isCompressionEnabled = properties.getProperty(CProperties.IS_COMPRESSION_ENABLED.getName()).trim();
+		final String isCompressionEnabled = properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName()).trim();
 		return isCompressionEnabled.equals("true") ? true : false;
 	}
 

@@ -23,19 +23,22 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-class Helper {
+/**
+ * Helper class providing convenience methods.
+ */
+class ComboHelper {
 
-	private static volatile Helper instance = null;
+	private static volatile ComboHelper instance = null;
 
-	private Helper() {
+	private ComboHelper() {
 		// empty constructor
 	}
 
-	public static Helper getInstance() {
+	public static ComboHelper getInstance() {
 		if (instance == null) {
-			synchronized (Helper.class) {
+			synchronized (ComboHelper.class) {
 				if (instance == null) {
-					instance = new Helper();
+					instance = new ComboHelper();
 				}
 			}
 		}

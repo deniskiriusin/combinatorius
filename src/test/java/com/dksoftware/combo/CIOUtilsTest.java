@@ -99,7 +99,7 @@ public class CIOUtilsTest {
 	public void testLoadPropertiesFromClasspath() throws IOException {
 		Properties properties = new Properties();
 		properties = CIOUtils.loadPropertiesFromClasspath(ComboServlet.propertiesFileName);
-		final String cssDirPropertyName = CProperties.CSS_DIR.getName();
+		final String cssDirPropertyName = Property.CSS_DIR.getName();
 		Assert.assertTrue("Properties file should contain [" + cssDirPropertyName + "] key",
 				properties.get(cssDirPropertyName) != null);
 	}

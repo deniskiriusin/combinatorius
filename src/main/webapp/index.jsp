@@ -245,14 +245,13 @@
 
 		function refreshPage(event) {
 			// make request
-			setCookies(event, 'refresh');
 			makeRequest(event);
 		}
 
 		function addFile(event) {
 			replaceURL(event);
 			// make request
-			setCookies(event, 'add_file');
+			setCookies(event, 'ADD_FILE');
 			makeRequest(event);
 			// update directory tree
 			var ul = getDirectoryTreeUL(event);
@@ -266,7 +265,7 @@
 		function removeFile(event) {
 			replaceURL(event);
 			// make request
-			setCookies(event, 'remove_file');
+			setCookies(event, 'REMOVE_FILE');
 			makeRequest(event);
 			// update directory tree
 			var ul = getDirectoryTreeUL(event);
@@ -287,7 +286,7 @@
 
 		function modifyFile(event) {
 			$(this).timedDisable(2000);
-			setCookies(event, 'modify_file');
+			setCookies(event, 'MODIFY_FILE');
 			makeRequest(event);
 			var fileName = 'layout.css';
 			if (event.data.obj.type === 'js') {

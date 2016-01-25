@@ -15,6 +15,18 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+/**
+ * Simple JSP tag to constructs URL. The tag has four attributes including <tt>type</tt>, <tt>path</tt>, <tt>csv_resources</tt> and <tt>theme</tt>.
+ * <br><br>
+ * <b>Usage example</b>:
+ * 
+ * <pre>
+ * &lt;cb:combo type="css" path="${path}">
+ *     &lt;jsp:attribute name="theme">${theme}</jsp:attribute>
+ *     &lt;jsp:attribute name="csv_resources">${resources}</jsp:attribute>
+ * &lt;/cb:combo>
+ * </pre>
+ */
 public class ComboTag extends SimpleTagSupport {
 
 	private String type;

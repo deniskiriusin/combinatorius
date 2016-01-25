@@ -9,7 +9,7 @@ package com.dksoftware.combo;
 /**
  * The names of the properties defined in <code>combinatorius.properties</code> file.
  */
-enum CProperties {
+enum Property {
 
 	/**
 	 * The property defines main CSS directory
@@ -53,7 +53,7 @@ enum CProperties {
 
 	private final String name;
 
-	CProperties(final String name) {
+	Property(final String name) {
 		this.name = name;
 	}
 

@@ -27,13 +27,6 @@ import com.google.gson.Gson;
 
 public class UIControllerFilter implements Filter {
 
-	enum EventHandler {
-		ADD_FILE,
-		MODIFY_FILE,
-		REMOVE_FILE,
-		REFRESH;
-	}
-	
 	static Properties properties;
 	
 	private ModifyFileStrategy modifyFileStrategy;
@@ -43,13 +36,28 @@ public class UIControllerFilter implements Filter {
 	// no synchronisation required
 	private static String cssDirPath = null;
 	private static String jsDirPath = null;
+	
+	/**
+	 * UI event type: <br>
+	 * 
+	 * <pre>
+	 * 1) ADD_FILE
+	 * 2) MODIFY_FILE
+	 * 2) REMOVE_FILE
+	 * </pre> 
+	 */
+	enum UIEventType {
+		ADD_FILE,
+		MODIFY_FILE,
+		REMOVE_FILE;
+	}
 
 	@Override
 	public void init(FilterConfig filterConfig) {
 		try {
 			properties = CIOUtils.loadPropertiesFromClasspath(ComboServlet.propertiesFileName);
-			cssDirPath = properties.getProperty(CProperties.CSS_DIR.getName());
-			jsDirPath = properties.getProperty(CProperties.JS_DIR.getName());
+			cssDirPath = properties.getProperty(Property.CSS_DIR.getName());
+			jsDirPath = properties.getProperty(Property.JS_DIR.getName());
 			modifyFileStrategy = new ModifyFileStrategy();
 			addFileStrategy = new AddFileStrategy();
 			removeFileStrategy = new RemoveFileStrategy();
@@ -58,12 +66,6 @@ public class UIControllerFilter implements Filter {
 		}
 	}
 	
-	Event getEventFromJSON(String event_json) throws URISyntaxException {
-		Gson gson = new Gson();
-		event_json = new java.net.URI(event_json).getPath();
-		return gson.fromJson(event_json, Event.class);
-	}
-
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -74,7 +76,7 @@ public class UIControllerFilter implements Filter {
 		if (cookie != null && cookie.getValue() != null) {
 			final String event_json = cookie.getValue();
 			try {
-				Event event = getEventFromJSON(event_json);
+				UIEvent event = getEventFromJSON(event_json);
 				EventHandlerStrategy strategy = getSelectedStrategy(event);
 				strategy.handleEvent(event.getType());
 			} catch(Exception e) {
@@ -89,22 +91,21 @@ public class UIControllerFilter implements Filter {
 			httpServletResponse.addCookie(cookie);
 		}
 	}
+	
+	UIEvent getEventFromJSON(String event_json) throws URISyntaxException {
+		Gson gson = new Gson();
+		event_json = new java.net.URI(event_json).getPath();
+		return gson.fromJson(event_json, UIEvent.class);
+	}
 
-	EventHandlerStrategy getSelectedStrategy(Event event) {
+	EventHandlerStrategy getSelectedStrategy(UIEvent event) {
 		EventHandlerStrategy strategy = null;
-		if (event.getName().equalsIgnoreCase(EventHandler.ADD_FILE.toString())) {
+		if (event.getName() == UIEventType.ADD_FILE) {
 			strategy = addFileStrategy;
-		} else if (event.getName().equalsIgnoreCase(EventHandler.REMOVE_FILE.toString())) {
+		} else if (event.getName() == UIEventType.REMOVE_FILE) {
 			strategy = removeFileStrategy;
-		} else if (event.getName().equalsIgnoreCase(EventHandler.MODIFY_FILE.toString())) {
+		} else if (event.getName() == UIEventType.MODIFY_FILE) {
 			strategy = modifyFileStrategy;
-		} else if (event.getName().equalsIgnoreCase(EventHandler.REFRESH.toString())) {
-			strategy = new EventHandlerStrategy() {
-				@Override
-				public void handleEvent(String type) throws IOException {
-					// dummy default strategy
-				}
-			};
 		} else {
 			throw new IllegalArgumentException("No event handler for [" + event.getName() + "] event type exists.");
 		}
@@ -154,32 +155,74 @@ public class UIControllerFilter implements Filter {
 		}
 	}
 	
-	static class Event {
-		private String name = null;
+	/**
+	 * Represents Ajax request generated UI event. The event created by reading JSON
+	 * based <tt>combinatorius.event</tt> cookie value.
+	 */
+	static class UIEvent {
+		private UIEventType name = null;
 		private String type = null;
-		
-		public String getName() {
-			synchronized (name) {
+		private volatile Object lock1 = new Object();
+		private volatile Object lock2 = new Object();
+
+		public UIEventType getName() {
+			synchronized (lock1) {
 				return name;
 			}
 		}
-		public void setName(String eventName) {
-			synchronized (name) {
-				name = eventName;
+
+		public void setName(UIEventType name) {
+			synchronized (lock1) {
+				this.name = name;
 			}
 		}
+
 		public String getType() {
-			synchronized (type) {
+			synchronized (lock2) {
 				return type;
 			}
 		}
+
 		public void setType(String eventType) {
-			synchronized (type) {
+			synchronized (lock2) {
 				type = eventType;
 			}
 		}
-	}
 
+		@Override
+		public String toString() {
+			return "UIEvent [name=" + name + ", type=" + type + "]";
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((type == null) ? 0 : type.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			UIEvent other = (UIEvent) obj;
+			if (name != other.name)
+				return false;
+			if (type == null) {
+				if (other.type != null)
+					return false;
+			} else if (!type.equals(other.type))
+				return false;
+			return true;
+		}
+	}
+	
 	@Override
 	public void destroy() {
 		System.out.println("UIControllerFilter is being taken out of service");
