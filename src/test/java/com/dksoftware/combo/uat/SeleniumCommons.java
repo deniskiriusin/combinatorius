@@ -31,7 +31,7 @@ public class SeleniumCommons extends FluentWebDriverPage {
 	}
 
 	private static void initWait() {
-		wait = new FluentWait<WebDriver>(webDriverProvider.get()).withTimeout(120, TimeUnit.SECONDS)
+		wait = new FluentWait<WebDriver>(webDriverProvider.get()).withTimeout(30, TimeUnit.SECONDS)
 				.pollingEvery(500, TimeUnit.MILLISECONDS).ignoring(NoSuchElementException.class);
 	}
 
