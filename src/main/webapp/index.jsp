@@ -8,9 +8,12 @@
 <html>
 <title>&#8721;&nbsp;&ndash;&nbsp;Combinatorius</title>
 <head>
-<meta http-equiv="Cache-Control" content="no-cache">
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
+<c:set var="theme" scope="page" value="blue"/>
+<c:set var="resources" scope="page" value="extra_css/extra1.css"/>
 <c:set var="contextPath" scope="page"><%= System.getProperty("contextPath") %></c:set>
 
 <c:choose>
@@ -21,8 +24,6 @@
 		<c:set var="path" scope="page" value="${contextPath}/combo/"/>
 	</c:otherwise>
 </c:choose>
-<c:set var="theme" scope="page" value="blue"/>
-<c:set var="resources" scope="page" value="extra_css/extra1.css"/>
 
 <link href="extra_css/font-awesome.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="extra_js/jquery-1.11.3.min.js"></script>
