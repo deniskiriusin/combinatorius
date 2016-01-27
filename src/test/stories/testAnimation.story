@@ -34,7 +34,8 @@ Scenario: Checking Add file JavaScript button
 
 Given I am on main page
 When I press 'add_file_js' button
-Then I should see '/combo/&type=js&resources=extra_js/extra1.js,extra_js/extra2.js&v=14' text in 'div#js_url' section
+Then I wait for '3' seconds
+And I should see '/combo/&type=js&resources=extra_js/extra1.js,extra_js/extra2.js&v=14' text in 'div#js_url' section
 And I should see '200 OK' text in 'div#js_url' section
 And I should see 'extra2.js' text in 'div#directory_tree' section
 And I verify style 'background-color' of the element 'div#directory_tree a.highlighted' is 'rgba(101, 92, 119, 1)'
