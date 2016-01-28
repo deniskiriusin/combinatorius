@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dksoftware</groupId>
 	<artifactId>combinatorius</artifactId>
-	<version>0.0.12-SNAPSHOT</version>
+	<version>0.0.13</version>
 	<packaging>jar</packaging>
 	<name>CSS and JavaScript combiner</name>
 	<description>Effective tool for delivering CSS and JavaScript files</description>
@@ -37,7 +36,7 @@
 		<connection>scm:git:git://github.com/deniskiriusin/combinatorius.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/deniskiriusin/combinatorius.git</developerConnection>
 		<url>http://github.com/deniskiriusin/combinatorius</url>
-		<tag>HEAD</tag>
+		<tag>tag1</tag>
 	</scm>
 
 	<properties>
@@ -75,7 +74,7 @@
 		<jettyProperties>${project.basedir}/src/test/resources/jetty.properties</jettyProperties>
 		<jettyConfig>${project.basedir}/src/main/webapp/WEB-INF/jetty_v8.xml</jettyConfig>
 		<ignore.failures>true</ignore.failures>
-		<meta.filter></meta.filter>
+		<meta.filter />
 		<threads>1</threads>
 		<skip>false</skip>
 		<stories>**/CombinatoriusStories.java</stories>
@@ -170,7 +169,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -183,7 +182,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
