@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dksoftware</groupId>
 	<artifactId>combinatorius</artifactId>
-	<version>0.0.32</version>
+	<version>0.0.33-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>CSS and JavaScript combiner</name>
 	<description>Effective tool for delivering CSS and JavaScript files</description>
@@ -36,7 +36,7 @@
 		<connection>scm:git:git://github.com/deniskiriusin/combinatorius.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/deniskiriusin/combinatorius.git</developerConnection>
 		<url>http://github.com/deniskiriusin/combinatorius</url>
-		<tag>Combinatorius-v0.0.32</tag>
+		<tag>tag4</tag>
 	</scm>
 
 	<properties>
