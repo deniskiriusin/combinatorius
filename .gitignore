@@ -1,9 +1,8 @@
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
 /bin/
 /.settings/
 /target/
 /.classpath
-/bin/
-/bin/
-/bin/
-/bin/
-/bin/
