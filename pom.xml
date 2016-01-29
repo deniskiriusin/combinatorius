@@ -594,7 +594,7 @@
 				</plugins>
 			</build>
 		</profile>
-		<profile>
+		<!-- <profile>
 			<id>disable-java8-doclint</id>
 			<activation>
 				<jdk>[1.8,)</jdk>
@@ -602,7 +602,7 @@
 			<properties>
 				<additionalparam>-Xdoclint:none</additionalparam>
 			</properties>
-		</profile>
+		</profile> -->
 		<profile>
 			<id>Windows</id>
 			<activation>
