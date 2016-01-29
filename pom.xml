@@ -60,6 +60,7 @@
 		<maven-checkstyle-plugin.version>2.12</maven-checkstyle-plugin.version>
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
 		<maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
+		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 		<log4j.version>1.2.16</log4j.version>
 		<jsp-api.version>2.1</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
@@ -415,7 +416,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.3</version>
+				<version>${maven-release-plugin.version}</version>
+				<configuration>
+				    <tagNameFormat>v@{project.version}</tagNameFormat>
+				    <autoVersionSubmodules>true</autoVersionSubmodules>
+				    <releaseProfiles>releases</releaseProfiles>
+			   </configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -571,6 +577,11 @@
 			<build>
 				<defaultGoal>integration-test</defaultGoal>
 			</build>
+		</profile>
+		<profile>
+			<id>releases</id>
+			<properties></properties>
+			<build></build>
 		</profile>
 		<profile>
 			<id>stable</id>
