@@ -28,7 +28,7 @@
 		<repository>
 			<id>local-repository</id>
 			<name>Local Repository</name>
-			<url>file://${basedir}/target/deploy</url>
+			<url>file://${project.basedir}/target/deploy</url>
 		</repository>
 	</distributionManagement>
 
