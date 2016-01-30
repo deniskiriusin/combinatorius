@@ -52,7 +52,24 @@ public class LifecycleSteps extends PerStoriesWebDriverSteps {
     public void clearCache() throws IOException {
     	File cssCacheDir = new File("src/main/webapp/css_cache");
     	File jsCacheDir = new File("src/main/webapp/js_cache");
-    	FileUtils.cleanDirectory(cssCacheDir);
-    	FileUtils.cleanDirectory(jsCacheDir);
+    	clearDirectory(cssCacheDir);
+    	clearDirectory(jsCacheDir);
     }
+    
+    private void clearDirectory(File directory) throws IOException {
+    	File[] files = directory.listFiles();
+        if (files == null) {  // null if security restricted
+            throw new IOException("Failed to list contents of " + directory);
+        }
+        for (File file : files) {
+        	if (!file.isHidden()) {
+	            try {
+	            	FileUtils.forceDelete(file);
+	            } catch (IOException ioe) {
+	                throw new IOException("Failed to delete file " + file.getAbsolutePath());
+	            }
+        	}
+        }
+    }
+    
 }
