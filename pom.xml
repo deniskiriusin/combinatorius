@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dksoftware</groupId>
 	<artifactId>combinatorius</artifactId>
-	<version>0.0.41-SNAPSHOT</version>
+	<version>1.0.41-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>CSS and JavaScript combiner</name>
 	<description>Effective tool for delivering CSS and JavaScript files</description>
@@ -405,6 +405,7 @@
 				    <tagNameFormat>combinatorius-v@{project.version}</tagNameFormat>
 				    <autoVersionSubmodules>true</autoVersionSubmodules>
 				    <releaseProfiles>releases</releaseProfiles>
+				    <useReleaseProfile>true</useReleaseProfile>
 			   </configuration>
 			</plugin>
 		</plugins>
