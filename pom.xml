@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dksoftware</groupId>
 	<artifactId>combinatorius</artifactId>
@@ -11,7 +12,7 @@
 
 	<developers>
 		<developer>
-			<name>Denis Kiriusin</name> 
+			<name>Denis Kiriusin</name>
 			<email>deniskir@gmail.com</email>
 		</developer>
 	</developers>
@@ -61,6 +62,7 @@
 		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
 		<maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<log4j.version>1.2.16</log4j.version>
 		<jsp-api.version>2.1</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
@@ -109,6 +111,28 @@
 						<target>1.6</target>
 						<compilerArgument>-proc:none</compilerArgument>
 					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.basedir}/target/classes/META-INF</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${project.basedir}/src/main/webapp/WEB-INF/tlds</directory>
+										<filtering>true</filtering>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -402,11 +426,11 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>${maven-release-plugin.version}</version>
 				<configuration>
-				    <tagNameFormat>combinatorius-v@{project.version}</tagNameFormat>
-				    <autoVersionSubmodules>true</autoVersionSubmodules>
-				    <releaseProfiles>releases</releaseProfiles>
-				    <useReleaseProfile>true</useReleaseProfile>
-			   </configuration>
+					<tagNameFormat>combinatorius-v@{project.version}</tagNameFormat>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<releaseProfiles>releases</releaseProfiles>
+					<useReleaseProfile>true</useReleaseProfile>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -448,7 +472,7 @@
 			<version>${jsp-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 
 		<!-- Runtime dependencies -->
 
@@ -548,7 +572,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 
 	<!-- Profiles -->
 
