@@ -21,10 +21,10 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * <b>Usage example</b>:
  * 
  * <pre>
- * <cb:combo type="css" path="${path}">
- *     <jsp:attribute name="theme">${theme}</jsp:attribute>
- *     <jsp:attribute name="csv_resources">${resources}</jsp:attribute>
- * </cb:combo>
+ * &lt;cb:combo type="css" path="${path}"&gt;
+ *     &lt;jsp:attribute name="theme"&gt;${theme}&lt;/jsp:attribute&gt;
+ *     &lt;jsp:attribute name="csv_resources"&gt;${resources}&lt;/jsp:attribute&gt;
+ * &lt;/cb:combo&gt;
  * </pre>
  */
 public class ComboTag extends SimpleTagSupport {
