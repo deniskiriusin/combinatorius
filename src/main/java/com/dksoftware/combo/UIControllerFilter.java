@@ -29,15 +29,15 @@ public class UIControllerFilter implements Filter {
 
 	static Properties properties;
 	public static final String combinatoriusEvent = "combinatorius.event";
-	
+
 	private ModifyFileStrategy modifyFileStrategy;
 	private AddFileStrategy addFileStrategy;
 	private RemoveFileStrategy removeFileStrategy;
-	
+
 	// no synchronisation required
 	private static String cssDirPath = null;
 	private static String jsDirPath = null;
-	
+
 	/**
 	 * UI event type: <br>
 	 * 
@@ -45,12 +45,10 @@ public class UIControllerFilter implements Filter {
 	 * 1) add_file
 	 * 2) modify_file
 	 * 2) remove_file
-	 * </pre> 
+	 * </pre>
 	 */
 	enum UIEventType {
-		add_file,
-		modify_file,
-		remove_file;
+		add_file, modify_file, remove_file;
 	}
 
 	@Override
@@ -66,7 +64,7 @@ public class UIControllerFilter implements Filter {
 			throw new RuntimeException("Initialization failed: ", e);
 		}
 	}
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -78,11 +76,11 @@ public class UIControllerFilter implements Filter {
 			final String event_json = cookie.getValue();
 			try {
 				UIEvent event = getEventFromJSON(event_json);
-				EventHandlerStrategy strategy = getSelectedStrategy(event);
-				if (strategy != null) {
+				if (event.getEventType() != null) {
+					EventHandlerStrategy strategy = getSelectedStrategy(event);
 					strategy.handleEvent(event);
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
@@ -94,7 +92,7 @@ public class UIControllerFilter implements Filter {
 			httpServletResponse.addCookie(cookie);
 		}
 	}
-	
+
 	UIEvent getEventFromJSON(String event_json) throws URISyntaxException {
 		Gson gson = new Gson();
 		event_json = new java.net.URI(event_json).getPath();
@@ -110,7 +108,8 @@ public class UIControllerFilter implements Filter {
 		} else if (event.getEventType() == UIEventType.modify_file) {
 			strategy = modifyFileStrategy;
 		} else {
-			throw new IllegalArgumentException("No event handler for [" + event.getEventType() + "] event type exists.");
+			throw new IllegalArgumentException(
+					"No event handler for [" + event.getEventType() + "] event type exists.");
 		}
 		return strategy;
 	}
@@ -124,9 +123,11 @@ public class UIControllerFilter implements Filter {
 		public void handleEvent(UIEvent event) throws IOException {
 			String path = "";
 			if (event.getMimeType() == MimeType.css) {
-				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_css" + File.separator + "extra2.css";
+				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_css"
+						+ File.separator + "extra2.css";
 			} else if (event.getMimeType() == MimeType.js) {
-				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_js" + File.separator + "extra2.js";
+				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_js"
+						+ File.separator + "extra2.js";
 			}
 			FileUtils.touch(CIOUtils.getLocalFile(path));
 		}
@@ -137,55 +138,58 @@ public class UIControllerFilter implements Filter {
 		public void handleEvent(UIEvent event) throws IOException {
 			String path = "";
 			if (event.getMimeType() == MimeType.css) {
-				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_css" + File.separator + "extra1.css";
+				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_css"
+						+ File.separator + "extra1.css";
 			} else if (event.getMimeType() == MimeType.js) {
-				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_js" + File.separator + "extra1.js";
+				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "../extra_js"
+						+ File.separator + "extra1.js";
 			}
 			FileUtils.touch(CIOUtils.getLocalFile(path));
 		}
 	}
-	
+
 	static class ModifyFileStrategy implements EventHandlerStrategy {
 		@Override
 		public void handleEvent(UIEvent event) throws IOException {
 			String path = "";
 			if (event.getMimeType() == MimeType.css) {
-				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "layout" + File.separator + "layout.css";
+				path = cssDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "layout" + File.separator
+						+ "layout.css";
 			} else if (event.getMimeType() == MimeType.js) {
 				path = jsDirPath + (path.endsWith(File.separator) ? "" : File.separator) + "jquery-ui.js";
 			}
 			FileUtils.touch(CIOUtils.getLocalFile(path));
 		}
 	}
-	
+
 	/**
-	 * Represents Ajax request generated UI event. The event created by reading JSON
-	 * based <tt>combinatorius.event</tt> cookie value.
+	 * Represents Ajax request generated UI event. The event created by reading
+	 * JSON based <tt>combinatorius.event</tt> cookie value.
 	 */
 	static class UIEvent {
 		private UIEventType eventType = null;
 		private MimeType mimeType = null;
 		private volatile Object lock1 = new Object();
 		private volatile Object lock2 = new Object();
-		
+
 		public UIEventType getEventType() {
 			synchronized (lock1) {
 				return eventType;
 			}
 		}
-		
+
 		public void setEventType(UIEventType eventType) {
 			synchronized (lock1) {
 				this.eventType = eventType;
 			}
 		}
-		
+
 		public MimeType getMimeType() {
 			synchronized (lock2) {
 				return mimeType;
 			}
 		}
-		
+
 		public void setMimeType(MimeType mimeType) {
 			synchronized (lock2) {
 				this.mimeType = mimeType;
@@ -222,7 +226,7 @@ public class UIControllerFilter implements Filter {
 			return true;
 		}
 	}
-	
+
 	@Override
 	public void destroy() {
 		System.out.println("UIControllerFilter is being taken out of service");

@@ -142,7 +142,7 @@
 							<manifestFile>${project.basedir}/src/main/resources/META-INF/MANIFEST.MF</manifestFile>
 							<index>true</index>
 							<manifest>
-								<addClasspath>false</addClasspath>
+								<addClasspath>true</addClasspath>
 							</manifest>
 							<manifestEntries>
 								<url>${project.url}</url>
@@ -471,15 +471,11 @@
 			<version>${jsp-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
-
-		<!-- Runtime dependencies -->
-
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
-			<scope>runtime</scope>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Test dependencies -->
