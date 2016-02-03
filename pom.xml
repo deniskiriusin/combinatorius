@@ -26,19 +26,19 @@
 	</licenses>
 
 	<distributionManagement>
-		<!-- <repository>
+		<repository>
 			<id>local-repository</id>
 			<name>Local Repository</name>
 			<url>file://${project.basedir}/target/deploy</url>
-		</repository> -->
+		</repository>
 		<!-- <snapshotRepository>
 		    <id>ossrh</id>
 		    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository> -->
+		</snapshotRepository>
 		<repository>
 		    <id>ossrh</id>
 		    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
+		</repository> -->
 	</distributionManagement>
 
 	<scm>
