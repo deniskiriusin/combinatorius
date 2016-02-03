@@ -85,7 +85,7 @@ public class ComboServlet extends HttpServlet {
 			if (HttpUtils.isRequestModified(request, eTag)) {
 				setResponseHeaders(request, response, eTag, lastModified, bytes.length);
 				// update 'v' URL parameter, a.k.a fingerprint
-				getServletContext().setAttribute("com.dksoftware.combo.v_" + requestDetails.get().getExtension(),
+				getServletContext().setAttribute("com.dkiriusin.combo.v_" + requestDetails.get().getExtension(),
 						lastModified);
 				in = new ByteArrayInputStream(bytes);
 				out = response.getOutputStream();

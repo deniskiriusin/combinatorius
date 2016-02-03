@@ -14,8 +14,8 @@
 	<tag>
 		<name>combo</name>
 		<description>Constructs URL for Combinatorius</description>
-		<tag-class>com.dksoftware.combo.ComboTag</tag-class>
-		<tei-class>com.dksoftware.combo.ComboTagExtraInfo</tei-class>
+		<tag-class>com.dkiriusin.combo.ComboTag</tag-class>
+		<tei-class>com.dkiriusin.combo.ComboTagExtraInfo</tei-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>type</name>

@@ -47,8 +47,8 @@ public class ComboTagTest {
 	public void setUp() throws Exception {
 		tag.setJspContext(pageContext);
 		Mockito.when(pageContext.getServletContext()).thenReturn(servletContext);
-		Mockito.when(servletContext.getAttribute("com.dksoftware.combo.v_css")).thenReturn(11201122321L);
-		Mockito.when(servletContext.getAttribute("com.dksoftware.combo.v_js")).thenReturn(11201122321L);
+		Mockito.when(servletContext.getAttribute("com.dkiriusin.combo.v_css")).thenReturn(11201122321L);
+		Mockito.when(servletContext.getAttribute("com.dkiriusin.combo.v_js")).thenReturn(11201122321L);
 
 	}
 

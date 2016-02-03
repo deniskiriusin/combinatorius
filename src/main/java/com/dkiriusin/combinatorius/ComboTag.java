@@ -102,7 +102,7 @@ public class ComboTag extends SimpleTagSupport {
 		}
 		PageContext pageContext = (PageContext) getJspContext();
 		ServletContext servletContext = pageContext.getServletContext();
-		Long v = (Long) servletContext.getAttribute("com.dksoftware.combo.v_" + getType());
+		Long v = (Long) servletContext.getAttribute("com.dkiriusin.combo.v_" + getType());
 		if (v == null) {
 			v = System.currentTimeMillis();
 		}
