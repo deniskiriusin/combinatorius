@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dkiriusin</groupId>
 	<artifactId>combinatorius</artifactId>
-	<version>1.0.45-SNAPSHOT</version>
+	<version>1.0.45</version>
 	<packaging>jar</packaging>
 	<name>CSS and JavaScript combiner</name>
 	<description>Effective tool for delivering CSS and JavaScript files</description>
