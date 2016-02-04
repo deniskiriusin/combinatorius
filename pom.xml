@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dkiriusin</groupId>
 	<artifactId>combinatorius</artifactId>
-	<version>1.0.49-SNAPSHOT</version>
+	<version>1.0.49</version>
 	<packaging>jar</packaging>
 	<name>CSS and JavaScript combiner</name>
 	<description>Effective tool for delivering CSS and JavaScript files</description>
@@ -40,7 +39,7 @@
 		<connection>scm:git:git://github.com/deniskiriusin/combinatorius.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/deniskiriusin/combinatorius.git</developerConnection>
 		<url>http://github.com/deniskiriusin/combinatorius</url>
-		<tag>combinatorius-v1.0.45</tag>
+		<tag>combinatorius-v1.0.49</tag>
 	</scm>
 
 	<properties>
