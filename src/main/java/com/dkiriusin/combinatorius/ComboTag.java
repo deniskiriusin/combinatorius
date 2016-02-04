@@ -21,6 +21,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * <b>Usage example</b>:
  * 
  * <pre>
+ * &lt;%@ taglib uri="https://github.com/deniskiriusin/combinatorius" prefix="cb" %&gt;
+ * <br>
  * &lt;cb:combo type="css" path="${path}"&gt;
  *     &lt;jsp:attribute name="theme"&gt;${theme}&lt;/jsp:attribute&gt;
  *     &lt;jsp:attribute name="csv_resources"&gt;${resources}&lt;/jsp:attribute&gt;
