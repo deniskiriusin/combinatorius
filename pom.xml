@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dkiriusin</groupId>
 	<artifactId>combinatorius</artifactId>
@@ -25,19 +26,10 @@
 	</licenses>
 
 	<distributionManagement>
-		<repository>
-			<id>local-repository</id>
-			<name>Local Repository</name>
-			<url>file://${project.basedir}/target/deploy</url>
-		</repository>
-		<!-- <snapshotRepository>
-		    <id>ossrh</id>
-		    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
-		<repository>
-		    <id>ossrh</id>
-		    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository> -->
 	</distributionManagement>
 
 	<scm>
@@ -70,7 +62,8 @@
 		<maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
 		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
-		<nexus-staging-maven-plugin.version>1.6.3</nexus-staging-maven-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.6</nexus-staging-maven-plugin.version>
+		<maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
 		<log4j.version>1.2.16</log4j.version>
 		<jsp-api.version>2.1</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
@@ -593,7 +586,7 @@
 		<profile>
 			<id>releases</id>
 			<properties />
-			<!-- <build>
+			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
@@ -622,8 +615,22 @@
 							<autoReleaseAfterClose>false</autoReleaseAfterClose>
 						</configuration>
 					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 				</plugins>
-			</build> -->
+			</build>
 		</profile>
 		<profile>
 			<id>stable</id>
