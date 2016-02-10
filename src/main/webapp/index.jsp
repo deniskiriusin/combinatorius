@@ -245,6 +245,7 @@
 
 		function refreshPage(event) {
 			// make request
+			setCookies(event, null);
 			makeRequest(event);
 		}
 
