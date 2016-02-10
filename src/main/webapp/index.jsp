@@ -26,8 +26,6 @@
 </c:choose>
 
 <link href="extra_css/font-awesome.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="extra_js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="extra_js/jquery.animate-colors-min.js"></script>
 
 <cb:combo type="css" path="${path}">
 	<jsp:attribute name="theme">${theme}</jsp:attribute>

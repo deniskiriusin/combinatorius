@@ -13,9 +13,9 @@ import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -196,7 +196,7 @@ public class ComboServlet extends HttpServlet {
 	 * @return unmodifiable collection of files, never <code>null</code>
 	 */
 	Collection<File> getFiles(HttpServletRequest request, final RequestDetails requestDetails) {
-		Set<File> fileSet = new LinkedHashSet<File>();
+		Set<File> fileSet = new ConcurrentSkipListSet<File>();
 		if (requestDetails == null) {
 			return fileSet;
 		}
