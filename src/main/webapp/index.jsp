@@ -91,7 +91,7 @@
 					<li>&mdash;&nbsp;<code>ETag</code> support to determine whether the component in the browser's cache matches the one on the origin server.</li>
 					<li>&mdash;&nbsp;Gzip compression to reduce response times by reducing the size of the HTTP response.</li>
 					<li>&mdash;&nbsp;Fingerprinting a.k.a static web resources versioning.</li>
-					<li>&mdash;&nbsp;Themes support (explicit or via cookies).</li>
+					<li>&mdash;&nbsp;Themes support (explicit or via cookies).</li> 
 					<li>&mdash;&nbsp;Flexible directory structure support.</li>
 					<li>&mdash;&nbsp;Simple configuration, usage and deployment.</li>
 				</ul>
