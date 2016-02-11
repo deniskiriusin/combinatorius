@@ -323,6 +323,6 @@ public class ComboServlet extends HttpServlet {
 	@Override
 	public String getServletInfo() {
 		return "Combinatorius by Denis Kiriusin (deniskir@gmail.com). "
-				+ "An effective tool for delivering CSS and JavaScript files";
+				+ "CSS and JavaScript concatenation tool";
 	}
 }

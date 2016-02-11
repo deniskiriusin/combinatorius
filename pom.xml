@@ -5,8 +5,8 @@
 	<artifactId>combinatorius</artifactId>
 	<version>1.0.53-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>CSS and JavaScript combiner</name>
-	<description>Effective tool for delivering CSS and JavaScript files</description>
+	<name>CSS and JavaScript concatenation tool</name>
+	<description>A simple and effective tool for CSS and JavaScript concatenation</description>
 	<url>https://github.com/deniskiriusin/combinatorius</url>
 
 	<developers>

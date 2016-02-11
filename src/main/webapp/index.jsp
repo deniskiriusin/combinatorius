@@ -40,7 +40,7 @@
 
 	<div id="wrapper">
 
-		<h1>Combinatorius &mdash; an effective tool for delivering CSS and JavaScript files</h1>
+		<h1>Combinatorius &mdash; CSS and JavaScript concatenation tool</h1>
 		
 		<div id="themes">
 			<ul>

@@ -7,7 +7,7 @@ As a user I want to ensure the wording at the main page
 Scenario: Checking default wording
 
 Given I am on main page
-Then I should see 'an effective tool for delivering CSS and JavaScript files' text
+Then I should see 'CSS and JavaScript concatenation tool' text
 And I should see 'Generated URL:' text
 And I should see 'Response Headers (JavaScript)' text
 And I should see 'Response Headers (CSS)' text
