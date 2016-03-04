@@ -242,11 +242,16 @@
 		function getDirectoryTreeUL(event) {
 			return $('#tree li:has(a:contains(extra1.' + event.data.obj.type + ')) > ul').last();	
 		}
+		
+		function refreshDirectoryTree() {
+			$('#directory_tree a.highlighted').removeClass('highlighted');
+		}
 
 		function refreshPage(event) {
 			// make request
 			setCookies(event, null);
 			makeRequest(event);
+			refreshDirectoryTree();
 		}
 
 		function addFile(event) {
@@ -254,6 +259,7 @@
 			// make request
 			setCookies(event, 'add_file');
 			makeRequest(event);
+			refreshDirectoryTree();
 			// update directory tree
 			var ul = getDirectoryTreeUL(event);
 			var i = $('<i></i>').addClass('fa fa-folder-o');
@@ -268,6 +274,7 @@
 			// make request
 			setCookies(event, 'remove_file');
 			makeRequest(event);
+			refreshDirectoryTree();
 			// update directory tree
 			var ul = getDirectoryTreeUL(event);
 			$('li:nth-child(2)', ul).fadeOut(1000, function() { $(this).remove(); });
@@ -289,6 +296,7 @@
 			$(this).timedDisable(2000);
 			setCookies(event, 'modify_file');
 			makeRequest(event);
+			refreshDirectoryTree();
 			var fileName = 'layout.css';
 			if (event.data.obj.type === 'js') {
 				$('#tree li:has(a:contains(jquery-ui.js)) > a').last().blink();	
@@ -421,7 +429,7 @@
 		bindButtons();
 		bindThemes();
 		
-		// triggering CTRL+F5 buttons for CSS and JavaScript
+		// triggering CTRL+F5 events for CSS and JavaScript
 		$('button#ctrl_f5_js', '#js_url').trigger("click");
 		$('button#ctrl_f5_css', '#css_url').trigger("click");
 	});
