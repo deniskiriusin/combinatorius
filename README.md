@@ -6,8 +6,9 @@
 * Appropriate <code>Expires</code> and <code>Cache-Control</code> headers to help browser with conditional requests.
 * <code>ETag</code> support to determine whether the component in the browser's cache matches the one on the origin server.
 * Gzip compression to reduce response times by reducing the size of the HTTP response.
+* YUI Compressor support
 * Fingerprinting a.k.a static web resources versioning.
-* Themes support (explicit or via cookies).
+* Themes support (set via URL parameter or cookies).
 * Flexible directory structure support.
 * Simple configuration, usage and deployment.
 
