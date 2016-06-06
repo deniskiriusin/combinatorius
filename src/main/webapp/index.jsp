@@ -80,7 +80,7 @@
 				<p><span>Ctrl+F5 refresh</span> &mdash; send non-cacheble request.</p>
 				<p><span>Add file</span> &mdash; add new JavaScript or CSS file to directory tree.</p>
 				<p><span>Delete file</span> &mdash; delete JavaScript or CSS file from directory tree.</p>
-				<p><span>Modify file</span> &mdash; modifies <i>"jquery-ui.js"</i> or <i>"layout.css"</i> file respectively.</p>
+				<p><span>Modify file</span> &mdash; modify <i>"jquery-ui.js"</i> or <i>"layout.css"</i> file respectively.</p>
 				<p>&nbsp;</p>
 				<p>&nbsp;</p>
 				<p><span class="features">Key features</span></p>
@@ -90,8 +90,9 @@
 					<li>&mdash;&nbsp;Appropriate <code>Expires</code> and <code>Cache-Control</code> headers to help the browser with conditional requests.</li>
 					<li>&mdash;&nbsp;<code>ETag</code> support to determine whether the component in the browser's cache matches the one on the origin server.</li>
 					<li>&mdash;&nbsp;Gzip compression to reduce response times by reducing the size of the HTTP response.</li>
+					<li>&mdash;&nbsp;YUI Compressor support.</li>
 					<li>&mdash;&nbsp;Fingerprinting a.k.a static web resources versioning.</li>
-					<li>&mdash;&nbsp;Themes support (explicit or via cookies).</li> 
+					<li>&mdash;&nbsp;Themes support (explicitly set via URL parameter or via cookies).</li>
 					<li>&mdash;&nbsp;Flexible directory structure support.</li>
 					<li>&mdash;&nbsp;Simple configuration, usage and deployment.</li>
 				</ul>

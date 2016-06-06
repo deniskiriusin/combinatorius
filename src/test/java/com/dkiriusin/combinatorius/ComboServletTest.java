@@ -79,10 +79,18 @@ public class ComboServletTest {
 		Mockito.when(requestDetails.get()).thenReturn(requestDetailsObject);
 		
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL));
-		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
-		Mockito.when(properties.getProperty(Property.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
-		Mockito.when(properties.getProperty(Property.CSS_CACHE_DIR.getName())).thenReturn("css_cache");
-		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.CSS_DIR.getName()), Mockito.anyString())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.THEMES_DIR.getName()), Mockito.anyString())).thenReturn("src/test/resources/themes");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.CSS_CACHE_DIR.getName()), Mockito.anyString())).thenReturn("css_cache");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.IS_COMPRESSION_ENABLED.getName()), Mockito.anyString())).thenReturn("true");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.IS_YUI_COMPRESSOR_ENABLED.getName()), Mockito.anyString())).thenReturn("false");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_OMIT_FILES_FROM_MINIFICATION_REGEX.getName()), Mockito.anyString())).thenReturn(".*\\.min\\.(js|css)$");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_CSSCOMPRESSOR_LINEBREAKPOS.getName()), Mockito.anyString())).thenReturn("-1");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_DISABLEOPTIMISATIONS.getName()), Mockito.anyString())).thenReturn("true");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_LINEBREAK.getName()), Mockito.anyString())).thenReturn("100");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_MUNGE.getName()), Mockito.anyString())).thenReturn("false");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_PRESERVEALLSEMICOLONS.getName()), Mockito.anyString())).thenReturn("true");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_VERBOSE.getName()), Mockito.anyString())).thenReturn("false");
 	}
 
 	@After
@@ -141,6 +149,8 @@ public class ComboServletTest {
 	
 	@Test
 	public void testDoGetWithIcorrectResourcesURL() throws ServletException, IOException {
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Property.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
 		servlet.doGet(request, response);
 		Mockito.verify(response).sendError(Mockito.eq(HttpServletResponse.SC_BAD_REQUEST), 
 				Mockito.contains("Error trying to get content:"));
@@ -148,6 +158,8 @@ public class ComboServletTest {
 	
 	@Test
 	public void testDoGetWithNoCacheDir() throws ServletException, IOException {
+		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
+		Mockito.when(properties.getProperty(Property.THEMES_DIR.getName())).thenReturn("src/test/resources/themes");
 		Mockito.when(properties.getProperty(Property.CSS_CACHE_DIR.getName())).thenReturn(null);
 		servlet.doGet(request, response);
 		Mockito.verify(response).sendError(Mockito.eq(HttpServletResponse.SC_BAD_REQUEST), 
@@ -173,9 +185,9 @@ public class ComboServletTest {
 	@Test
 	public void testSetResponseHeaders() {
 		Mockito.when(request.getScheme()).thenReturn("non-https");
-		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
-		Mockito.when(properties.getProperty(Property.S_MAXAGE.getName())).thenReturn("31536000");
-		Mockito.when(properties.getProperty(Property.MAX_AGE.getName())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.IS_COMPRESSION_ENABLED.getName()), Mockito.anyString())).thenReturn("true");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.S_MAXAGE.getName()), Mockito.anyString())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.MAX_AGE.getName()), Mockito.anyString())).thenReturn("31536000");
 
 		ComboServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
 
@@ -191,9 +203,9 @@ public class ComboServletTest {
 	@Test
 	public void testSetResponseHeadersHTTPS() {
 		Mockito.when(request.getScheme()).thenReturn("https");
-		Mockito.when(properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName())).thenReturn("true");
-		Mockito.when(properties.getProperty(Property.S_MAXAGE.getName())).thenReturn("31536000");
-		Mockito.when(properties.getProperty(Property.MAX_AGE.getName())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.IS_COMPRESSION_ENABLED.getName()), Mockito.anyString())).thenReturn("true");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.S_MAXAGE.getName()), Mockito.anyString())).thenReturn("31536000");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.MAX_AGE.getName()), Mockito.anyString())).thenReturn("31536000");
 
 		ComboServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
 

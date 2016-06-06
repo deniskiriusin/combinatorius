@@ -1,1 +1,2 @@
-/* Placeholder */
+/* Comment */
+var b = 2;

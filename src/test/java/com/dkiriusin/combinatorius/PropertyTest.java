@@ -23,6 +23,14 @@ public class PropertyTest {
 		Assert.assertEquals(Property.S_MAXAGE.getName(), "prop.s-maxage");
 		Assert.assertEquals(Property.MAX_AGE.getName(), "prop.max-age");
 		Assert.assertEquals(Property.IS_COMPRESSION_ENABLED.getName(), "prop.isCompressionEnabled");
-		Assert.assertEquals(Property.values().length, 8);
+		Assert.assertEquals(Property.IS_YUI_COMPRESSOR_ENABLED.getName(), "prop.isYUICompressorEnabled");
+		Assert.assertEquals(Property.YUI_CSSCOMPRESSOR_LINEBREAKPOS.getName(), "prop.YUI.CSSCompressor.linebreakpos");
+		Assert.assertEquals(Property.YUI_JAVASCRIPT_COMPRESSOR_LINEBREAK.getName(), "prop.YUI.JavaScriptCompressor.linebreak");
+		Assert.assertEquals(Property.YUI_JAVASCRIPT_COMPRESSOR_MUNGE.getName(), "prop.YUI.JavaScriptCompressor.munge");
+		Assert.assertEquals(Property.YUI_JAVASCRIPT_COMPRESSOR_VERBOSE.getName(), "prop.YUI.JavaScriptCompressor.verbose");
+		Assert.assertEquals(Property.YUI_JAVASCRIPT_COMPRESSOR_PRESERVEALLSEMICOLONS.getName(), "prop.YUI.JavaScriptCompressor.preserveAllSemiColons");
+		Assert.assertEquals(Property.YUI_JAVASCRIPT_COMPRESSOR_DISABLEOPTIMISATIONS.getName(), "prop.YUI.JavaScriptCompressor.disableOptimisations");
+		Assert.assertEquals(Property.YUI_OMIT_FILES_FROM_MINIFICATION_REGEX.getName(), "prop.YUI.OmitFilesFromMinificationRegEx");
+		Assert.assertEquals(Property.values().length, 16);
 	}
 }

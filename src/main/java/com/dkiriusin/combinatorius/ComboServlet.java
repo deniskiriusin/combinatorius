@@ -76,7 +76,7 @@ public class ComboServlet extends HttpServlet {
 			// check if any of files have been changed since the last request
 			final long lastModified = CIOUtils.lastModifiedFile(files);
 			// generate ETag
-			final String eTag = ComboHelper.getInstance().generateEtagValue(files, lastModified, isCompressionEnabled());
+			final String eTag = ComboHelper.getInstance().generateEtagValue(files, lastModified, requestDetails.get());
 			// the actual content
 			final byte[] bytes = ComboHelper.getInstance().getContent(requestDetails.get(), files, eTag, response);
 			// check if request or files have been modified to set proper cache headers,
@@ -140,7 +140,7 @@ public class ComboServlet extends HttpServlet {
 		if (request.getScheme().equalsIgnoreCase("https") || requestDetails.get().getVersion() > 0L) {
 			// add s-maxage to fix Apache mod_cache bug
 			// @see http://www.gossamer-threads.com/lists/apache/dev/344665
-			final String s_maxage = properties.getProperty(Property.S_MAXAGE.getName());
+			final String s_maxage = properties.getProperty(Property.S_MAXAGE.getName(), "31536000").trim();
 			cacheProxy = "public";
 			if (s_maxage != null) {
 				cacheProxy += ", s-maxage=" + s_maxage;
@@ -158,7 +158,7 @@ public class ComboServlet extends HttpServlet {
 		// set Cache-Control header (private - instructs proxies in the path not
 		// to cache the resource,
 		// browser will still cache)
-		final String max_age = properties.getProperty(Property.MAX_AGE.getName());
+		final String max_age = properties.getProperty(Property.MAX_AGE.getName(), "31536000").trim();
 		response.setHeader("Cache-Control", cacheProxy + (max_age != null ? (", max-age=" + max_age) : ""));
 		// Last-Modified: Tue, 15 Nov 2015 12:45:26 GMT
 		response.setDateHeader("Last-Modified", lastModified);
@@ -314,8 +314,80 @@ public class ComboServlet extends HttpServlet {
 	 * compression is enabled.
 	 */
 	static boolean isCompressionEnabled() {
-		final String isCompressionEnabled = properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName()).trim();
-		return isCompressionEnabled.equals("true") ? true : false;
+		final String isCompressionEnabled = properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName(), "false").trim();
+		return Boolean.parseBoolean(isCompressionEnabled);
+	}
+
+	/**
+	 * Checks <code>prop.isYUICompressorEnabled<code> property to identify if
+	 * YUI compressor is enabled.
+	 */
+	static boolean isYUICompressorEnabled() {
+		final String isYUICompressorEnabled = properties.getProperty(Property.IS_YUI_COMPRESSOR_ENABLED.getName(), "false").trim();
+		return Boolean.parseBoolean(isYUICompressorEnabled);
+	}
+
+	/**
+	 * Checks <code>prop.YUI.CSSCompressor.linebreakpos<code> property to identify the
+	 * maximum length allowed after CSS minification.
+	 */
+	static int getYUICSSCompressorLinebreakpos() {
+		final String linebreakpos = properties.getProperty(Property.YUI_CSSCOMPRESSOR_LINEBREAKPOS.getName(), "-1").trim();
+		return Integer.parseInt(linebreakpos);
+	}
+
+	/**
+	 * Checks <code>prop.YUI.JavaScriptCompressor.linebreak<code> property to identify the
+	 * maximum length allowed after JS minification.
+	 */
+	static int getYUIJavaScriptCompressorLinebreak() {
+		final String linebreak = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_LINEBREAK.getName(), "100").trim();
+		return Integer.parseInt(linebreak);
+	}
+
+	/**
+	 * Checks <code>prop.YUI.JavaScriptCompressor.munge<code> property to identify if
+	 * the obfuscation will be applied.
+	 */
+	static boolean isYUIJavaScriptCompressorMunge() {
+		final String munge = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_MUNGE.getName(), "false").trim();
+		return Boolean.parseBoolean(munge);
+	}
+
+	/**
+	 * Checks <code>prop.YUI.JavaScriptCompressor.verbose<code> property to identify the
+	 * verboseness of YUI output.
+	 */
+	static boolean isYUIJavaScriptCompressorVerbose() {
+		final String verbose = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_VERBOSE.getName(), "false").trim();
+		return Boolean.parseBoolean(verbose);
+	}
+
+	/**
+	 * Checks <code>prop.YUI.JavaScriptCompressor.preserveAllSemiColons<code> property to identify if
+	 * all semicolons must be preserved.
+	 */
+	static boolean isYUIJavaScriptCompressorPreserveAllSemiColons() {
+		final String preserveAllSemiColons = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_PRESERVEALLSEMICOLONS.getName(), "false").trim();
+		return Boolean.parseBoolean(preserveAllSemiColons);
+	}
+
+	/**
+	 * Checks <code>prop.YUI.JavaScriptCompressor.disableOptimisations<code> property to identify if
+	 * extra micro optimisation has to be disabled during YUI JavaScript minification.
+	 */
+	static boolean isYUIJavaScriptCompressorDisableOptimisations() {
+		final String disableOptimisations = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_DISABLEOPTIMISATIONS.getName(), "false").trim();
+		return Boolean.parseBoolean(disableOptimisations);
+	}
+
+	/**
+	 * Checks <code>prop.YUI.OmitFilesFromMinificationRegEx<code> property to identify
+	 * regular expression for the files that will be omitted from minification.
+	 */
+	static String getYUIOmitFilesFromMinificationRegEx() {
+		final String regex = properties.getProperty(Property.YUI_OMIT_FILES_FROM_MINIFICATION_REGEX.getName(), ".*\\.min\\.(js|css)$").trim();
+		return regex;
 	}
 
 	// Servlet Info

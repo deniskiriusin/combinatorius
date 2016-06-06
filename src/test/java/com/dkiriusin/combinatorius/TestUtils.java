@@ -27,7 +27,7 @@ import com.dkiriusin.combinatorius.ComboServlet;
 public class TestUtils {
 	
 	static final String LOCALHOST = "localhost";
-	static final String EXPECTED_ETAG = "8effce7dc7eabc4dc38928f832ad2d28";
+	static final String EXPECTED_ETAG = "7cd39a226af99cdb6813acbbaedf127a";
 	static final String URL_RESOURCES = "extra_css/extra1.css,extra_css/extra2.css";
 	static final String URL_NO_THEME = "/combo/&type=css&resources=" + URL_RESOURCES + "&v=16546544";
 	static final String URL = "/combo/&type=css&resources=" + URL_RESOURCES + "&theme=blue&v=16546544";

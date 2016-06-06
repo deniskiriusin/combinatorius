@@ -89,6 +89,7 @@
 		<chromeDriver>${project.basedir}/src/test/resources/webdrivers/chromedriver</chromeDriver>
 		<ieDriverServer>${project.basedir}/src/test/resources/webdrivers/IEDriverServer.exe</ieDriverServer>
 		<contextPath>/combinatorius</contextPath>
+		<yuicompressor.version>2.4.8</yuicompressor.version>
 	</properties>
 
 	<dependencyManagement>
@@ -459,6 +460,12 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.yahoo.platform.yui</groupId>
+			<artifactId>yuicompressor</artifactId>
+			<version>${yuicompressor.version}</version>
 			<scope>compile</scope>
 		</dependency>
 

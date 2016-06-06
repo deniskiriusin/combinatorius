@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -113,6 +114,22 @@ public class CIOUtilsTest {
 		final Set<String> set = Collections.singleton("css");
 		final Collection<File> files = CIOUtils.getUnmodifiableCollectionOfFiles(tp.getRoot(), set, true);
 		Assert.assertTrue("There should be two .css files in css directory", files.size() == 2);
+	}
+
+	@Test
+	public void testMinifyCSS() throws UnsupportedEncodingException, IOException {
+		final String css = "div { color: red; float: left; position: relative; }";
+		final byte[] minified_css = CIOUtils.minifyCSS(css.getBytes("UTF-8"), -1);
+		Assert.assertTrue("Initial CSS size should be 52", css.getBytes("UTF-8").length == 52);
+		Assert.assertTrue("Minified CSS size should be 43", minified_css.length == 43);
+	}
+
+	@Test
+	public void testMinifyJS() throws UnsupportedEncodingException, IOException {
+		final String js = "/* comment to strip */ function toggle() { document.getElementById('elementID') } ";
+		final byte[] minified_js = CIOUtils.minifyCSS(js.getBytes("UTF-8"), -1);
+		Assert.assertTrue("Initial CSS size should be 82", js.getBytes("UTF-8").length == 82);
+		Assert.assertTrue("Minified CSS size should be 55", minified_js.length == 55);
 	}
 
 }

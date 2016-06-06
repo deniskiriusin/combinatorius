@@ -7,12 +7,17 @@
 package com.dkiriusin.combinatorius;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Properties;
@@ -20,6 +25,9 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+
+import com.yahoo.platform.yui.compressor.CssCompressor;
+import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
 
 /**
  * Utility class contains useful static methods to simplify work with files.
@@ -80,6 +88,69 @@ class CIOUtils {
 			}
 		}
 		return gzippedBytes;
+	}
+
+	/**
+	 * Minifies CSS by utilising YUI {@link CssCompressor}.
+	 *
+	 * @param bytes - an array of bytes to minify
+	 * @param linebreakpos - split long line after a specific column
+	 * @return minified content as array of bytes
+	 * @throws IOException
+	 */
+	static final byte[] minifyCSS(final byte[] bytes, int linebreakpos) throws IOException {
+		Reader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(bytes)));
+		StringWriter writer = new StringWriter();
+
+		try {
+			new CssCompressor(reader).compress(writer, linebreakpos);
+		} catch (IndexOutOfBoundsException e) {
+			// handle YUI bug when file is empty or contains comments only
+			return new byte[] {};
+		}
+		finally {
+			if (reader != null) {
+				reader.close();
+			}
+			if (writer != null) {
+				writer.close();
+			}
+		}
+		return writer.toString().getBytes("UTF-8");
+	}
+
+	/**
+	 * Minifies JavaScript by utilising YUI {@link JavaScriptCompressor}.
+	 *
+	 * @param bytes - an array of bytes to minify
+	 * @param linebreak - split long line after a specific column
+	 * @param munge - obfuscate, not only minify
+	 * @param verbose - display informational messages and warnings
+	 * @param preserveAllSemiColons - preserve all semicolons
+	 * @param disableOptimisations - disable micro optimisations
+	 * @return minified content as array of bytes
+	 * @throws IOException
+	 */
+	static final byte[] minifyJS(final byte[] bytes, int linebreak, boolean munge, boolean verbose,
+			boolean preserveAllSemiColons, boolean disableOptimisations) throws IOException {
+		Reader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(bytes)));
+		StringWriter writer = new StringWriter();
+
+		try {
+			new JavaScriptCompressor(reader, null).compress(writer, linebreak, munge, verbose,
+					preserveAllSemiColons, disableOptimisations);
+		} catch (IndexOutOfBoundsException e) {
+			// handle YUI bug when file is empty or contains comments only
+			return new byte[] {};
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+			if (writer != null) {
+				writer.close();
+			}
+		}
+		return writer.toString().getBytes("UTF-8");
 	}
 
 	/**
