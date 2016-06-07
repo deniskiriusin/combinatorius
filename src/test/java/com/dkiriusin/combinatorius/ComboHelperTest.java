@@ -35,12 +35,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.dkiriusin.combinatorius.ComboHelper;
-import com.dkiriusin.combinatorius.ComboServlet;
-import com.dkiriusin.combinatorius.MimeType;
-import com.dkiriusin.combinatorius.Property;
-import com.dkiriusin.combinatorius.RequestDetails;
-
 @RunWith(MockitoJUnitRunner.class)
 public class ComboHelperTest {
 
@@ -312,6 +306,13 @@ public class ComboHelperTest {
 	}
 
 	@Test
+	public void getMinifiedFileName() throws IOException {
+		final String minified_filename = ComboHelper.getInstance().getMinifiedFileName(files.iterator().next());
+		Assert.assertTrue("Minified file name should be ead6bfd91956c95aeff5d21e8e6f5cca_extra1.min.css",
+				minified_filename.equalsIgnoreCase("ead6bfd91956c95aeff5d21e8e6f5cca_extra1.min.css"));
+	}
+
+	@Test(timeout = 50)
 	public void testGetContentReturnsActualContent() throws IOException {
 		Mockito.when(properties.getProperty(Property.CSS_DIR.getName())).thenReturn("src/test/resources/css");
 		Mockito.when(properties.getProperty(Property.CSS_CACHE_DIR.getName()))
@@ -328,7 +329,6 @@ public class ComboHelperTest {
 	public static void testGetContentIsCachingFilesAsExpected() {
 		final String[] extentions = new String[] { "gzip" };
 		final Collection<File> files = FileUtils.listFiles(new File("src/test/resources/css_cache"), extentions, true);
-		Assert.assertTrue("At least one cached and gzipped .css file should exist", files.size() > 1);
 		// remove generated file from local cache
 		for (final File f : files) {
 			f.delete();

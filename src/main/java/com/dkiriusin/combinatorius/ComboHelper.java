@@ -178,6 +178,25 @@ class ComboHelper {
 	}
 
 	/**
+	 * Returns the name of minified JavaScript or CSS file. The minified files are kept in cache directory.
+	 * The name format is <code>9a7264e193ef6bad8c1d180034be907f_filename.min.css</code>.
+	 *
+	 * @param f - file to rename
+	 * @return the name of minified file
+	 * @throws IOException
+	 */
+	final String getMinifiedFileName(final File f) throws IOException {
+		final String fileName = f.getName();
+		final StringBuilder sb = new StringBuilder(80)
+				.append(DigestUtils.md5Hex(IOUtils.toByteArray(new FileInputStream(f))))
+				.append("_")
+				.append(fileName.substring(0, fileName.lastIndexOf(".")))
+				.append(".min")
+				.append(fileName.substring(fileName.lastIndexOf(".")));
+		return sb.toString();
+	}
+
+	/**
 	 * The method compresses array of bytes if <code>Content-Encoding</code> response header is not set
 	 * and <code>prop.isCompressionEnabled</code> property is set to true.
 	 * 
@@ -206,24 +225,26 @@ class ComboHelper {
 		if (!file.getName().endsWith(".css") && !file.getName().endsWith(".js")) {
 			throw new IllegalArgumentException("File type is incorrect. Must be either .css or .js");
 		}
+		if (!ComboServlet.isYUICompressorEnabled()) {
+			throw new IllegalStateException("YUI Compressor must be enabled in combinatorius.properties "
+					+ "to perform file minification");
+		}
 		byte[] result = new byte[] {};
-		if (ComboServlet.isYUICompressorEnabled()) {
-			switch (requestDetails.getMimeType()) {
-				case css:
-					result = CIOUtils.minifyCSS(IOUtils.toByteArray(new FileInputStream(file)),
-							ComboServlet.getYUICSSCompressorLinebreakpos());
-					break;
-				case js:
-					result = CIOUtils.minifyJS(IOUtils.toByteArray(new FileInputStream(file)),
-							ComboServlet.getYUIJavaScriptCompressorLinebreak(),
-							ComboServlet.isYUIJavaScriptCompressorMunge(),
-							ComboServlet.isYUIJavaScriptCompressorVerbose(),
-							ComboServlet.isYUIJavaScriptCompressorPreserveAllSemiColons(),
-							ComboServlet.isYUIJavaScriptCompressorDisableOptimisations());
-					break;
-				default:
-					break;
-			}
+		switch (requestDetails.getMimeType()) {
+			case css:
+				result = CIOUtils.minifyCSS(IOUtils.toByteArray(new FileInputStream(file)),
+						ComboServlet.getYUICSSCompressorLinebreakpos());
+				break;
+			case js:
+				result = CIOUtils.minifyJS(IOUtils.toByteArray(new FileInputStream(file)),
+						ComboServlet.getYUIJavaScriptCompressorLinebreak(),
+						ComboServlet.isYUIJavaScriptCompressorMunge(),
+						ComboServlet.isYUIJavaScriptCompressorVerbose(),
+						ComboServlet.isYUIJavaScriptCompressorPreserveAllSemiColons(),
+						ComboServlet.isYUIJavaScriptCompressorDisableOptimisations());
+				break;
+			default:
+				break;
 		}
 		return result;
 	}
@@ -261,7 +282,8 @@ class ComboHelper {
 						// check if the file is not already minified, do not minify such files
 						if (!m.matches() && ComboServlet.isYUICompressorEnabled()) {
 							// minification is expensive process so we keep minified files in local cache
-							final String cached_file_name = getCombinedFileName(requestDetails, DigestUtils.md5Hex(f.getAbsolutePath()));
+							final String cached_file_name = getMinifiedFileName(f);
+							//final String cached_file_name = getCombinedFileName(requestDetails, DigestUtils.md5Hex(f.getAbsolutePath()));
 							final File cached_file = FileUtils.getFile(cacheDir, cached_file_name);
 							if (cached_file != null && cached_file.exists()) {
 								file_bytes = CIOUtils.getFilesByteArray(Collections.unmodifiableCollection(Collections.singleton(cached_file)));
