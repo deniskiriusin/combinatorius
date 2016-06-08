@@ -1,3 +1,5 @@
 language: java
-  - apt-get -qq update
-  - apt-get install google-chrome-stable
+sudo: required
+before-install:
+  - sudo apt-get -qq update
+  - sudo apt-get install google-chrome-stable
