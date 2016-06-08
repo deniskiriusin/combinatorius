@@ -2,5 +2,6 @@ language: java
 sudo: required
 before-install:
   - sudo apt-get update
+  - sudo apt-get libglib2.0-0
   - sudo apt-get install google-chrome-stable
   - sudo apt-get install chromedriver
