@@ -76,7 +76,7 @@
 		<jbehave.core.version>3.10</jbehave.core.version>
 		<jbehave.site.version>3.3</jbehave.site.version>
 		<jbehave.web.version>3.6-beta-2</jbehave.web.version>
-		<selenium.version>2.48.2</selenium.version>
+		<selenium.version>2.53.0</selenium.version>
 		<fluent.selenium.version>1.14.5</fluent.selenium.version>
 		<jettyProperties>${project.basedir}/src/test/resources/jetty.properties</jettyProperties>
 		<jettyConfig>${project.basedir}/src/main/webapp/WEB-INF/jetty_v8.xml</jettyConfig>
