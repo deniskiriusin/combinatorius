@@ -1,4 +1,4 @@
-### Combinatorius &mdash; CSS and JavaScript concatenation tool.&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://travis-ci.org/deniskiriusin/combinatorius.svg?branch=master"/>
+### Combinatorius &mdash; CSS and JavaScript concatenation tool.<a href="https://travis-ci.org/deniskiriusin/combinatorius"><img src="https://travis-ci.org/deniskiriusin/combinatorius.svg?branch=master"/></a>
 
 #### Key features:
 * Combined files to reduce the number of HTTP requests by combining all scripts into a single script, and similarly combining all CSS into a single stylesheet.
