@@ -314,7 +314,7 @@ public class ComboServlet extends HttpServlet {
 	 * compression is enabled.
 	 */
 	static boolean isCompressionEnabled() {
-		final String isCompressionEnabled = properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName(), "false").trim();
+		final String isCompressionEnabled = properties.getProperty(Property.IS_COMPRESSION_ENABLED.getName(), "true").trim();
 		return Boolean.parseBoolean(isCompressionEnabled);
 	}
 
@@ -323,7 +323,7 @@ public class ComboServlet extends HttpServlet {
 	 * YUI compressor is enabled.
 	 */
 	static boolean isYUICompressorEnabled() {
-		final String isYUICompressorEnabled = properties.getProperty(Property.IS_YUI_COMPRESSOR_ENABLED.getName(), "false").trim();
+		final String isYUICompressorEnabled = properties.getProperty(Property.IS_YUI_COMPRESSOR_ENABLED.getName(), "true").trim();
 		return Boolean.parseBoolean(isYUICompressorEnabled);
 	}
 
@@ -350,7 +350,7 @@ public class ComboServlet extends HttpServlet {
 	 * the obfuscation will be applied.
 	 */
 	static boolean isYUIJavaScriptCompressorMunge() {
-		final String munge = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_MUNGE.getName(), "false").trim();
+		final String munge = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_NOMUNGE.getName(), "false").trim();
 		return Boolean.parseBoolean(munge);
 	}
 
@@ -377,7 +377,7 @@ public class ComboServlet extends HttpServlet {
 	 * extra micro optimisation has to be disabled during YUI JavaScript minification.
 	 */
 	static boolean isYUIJavaScriptCompressorDisableOptimisations() {
-		final String disableOptimisations = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_DISABLEOPTIMISATIONS.getName(), "false").trim();
+		final String disableOptimisations = properties.getProperty(Property.YUI_JAVASCRIPT_COMPRESSOR_DISABLEOPTIMISATIONS.getName(), "true").trim();
 		return Boolean.parseBoolean(disableOptimisations);
 	}
 

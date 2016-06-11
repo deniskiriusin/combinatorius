@@ -113,7 +113,7 @@ public class ComboHelperTest {
 		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_CSSCOMPRESSOR_LINEBREAKPOS.getName()), Mockito.anyString())).thenReturn("-1");
 		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_DISABLEOPTIMISATIONS.getName()), Mockito.anyString())).thenReturn("true");
 		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_LINEBREAK.getName()), Mockito.anyString())).thenReturn("100");
-		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_MUNGE.getName()), Mockito.anyString())).thenReturn("false");
+		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_NOMUNGE.getName()), Mockito.anyString())).thenReturn("false");
 		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_PRESERVEALLSEMICOLONS.getName()), Mockito.anyString())).thenReturn("true");
 		Mockito.when(properties.getProperty(Mockito.eq(Property.YUI_JAVASCRIPT_COMPRESSOR_VERBOSE.getName()), Mockito.anyString())).thenReturn("false");
 	}

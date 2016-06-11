@@ -71,7 +71,7 @@ enum Property {
 	/**
 	 * The property defines if obfuscation will apply
 	 */
-	YUI_JAVASCRIPT_COMPRESSOR_MUNGE("prop.YUI.JavaScriptCompressor.munge"),
+	YUI_JAVASCRIPT_COMPRESSOR_NOMUNGE("prop.YUI.JavaScriptCompressor.nomunge"),
 
 	/**
 	 * The property defines the verboseness of YUI output
