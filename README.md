@@ -19,4 +19,6 @@
 &nbsp;&nbsp;&lt;jsp:attribute name=&quot;theme&quot;&gt;blue&lt;/jsp:attribute&gt;
 &nbsp;&nbsp;&lt;jsp:attribute name=&quot;csv_resources&quot;&gt;extra_css/extra1.css,extra_css/extra2.css&lt;/jsp:attribute&gt;
 &lt;/cb:combo&gt;
+
+&lt;cb:combo type="js" path="${path}"&gt;&lt;/cb:combo&gt;
 </pre>
