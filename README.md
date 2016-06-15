@@ -15,6 +15,7 @@
 <h1>JSP tag:</h1>
 <pre>
 &lt;%@ taglib uri="https://github.com/deniskiriusin/combinatorius" prefix="cb" %&gt;
+
 &lt;cb:combo type=&quot;css&quot; path=&quot;${path}&quot;&gt;
 &nbsp;&nbsp;&lt;jsp:attribute name=&quot;theme&quot;&gt;blue&lt;/jsp:attribute&gt;
 &nbsp;&nbsp;&lt;jsp:attribute name=&quot;csv_resources&quot;&gt;extra_css/extra1.css,extra_css/extra2.css&lt;/jsp:attribute&gt;
