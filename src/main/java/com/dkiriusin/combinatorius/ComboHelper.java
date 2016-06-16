@@ -283,7 +283,6 @@ class ComboHelper {
 						if (!m.matches() && ComboServlet.isYUICompressorEnabled()) {
 							// minification is expensive process so we keep minified files in local cache
 							final String cached_file_name = getMinifiedFileName(f);
-							//final String cached_file_name = getCombinedFileName(requestDetails, DigestUtils.md5Hex(f.getAbsolutePath()));
 							final File cached_file = FileUtils.getFile(cacheDir, cached_file_name);
 							if (cached_file != null && cached_file.exists()) {
 								file_bytes = CIOUtils.getFilesByteArray(Collections.unmodifiableCollection(Collections.singleton(cached_file)));
