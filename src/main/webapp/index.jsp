@@ -6,7 +6,7 @@
 <%@ page session="false" %>
 
 <html>
-<title>&#8721;&nbsp;&ndash;&nbsp;Combinatorius</title>
+<title>Combinatorius</title>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta http-equiv="Cache-Control" content="no-cache"/>
@@ -15,6 +15,7 @@
 <c:set var="theme" scope="page" value="blue"/>
 <c:set var="resources" scope="page" value="extra_css/extra1.css"/>
 <c:set var="contextPath" scope="page"><%= System.getProperty("contextPath") %></c:set>
+<link href="${contextPath}/images/favicon.ico" rel="icon" type="image/x-icon"/>
 
 <c:choose>
 	<c:when test="${fn:endsWith(contextPath, '/')}">
