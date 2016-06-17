@@ -23,3 +23,12 @@
 
 &lt;cb:combo type="js" path="${path}"&gt;&lt;/cb:combo&gt;
 </pre>
+
+<h1>Maven dependency:</h1>
+<pre>
+&lt;dependency&gt;
+    &lt;groupId&gt;com.dkiriusin&lt;/groupId&gt;
+    &lt;artifactId&gt;combinatorius&lt;/artifactId&gt;
+    &lt;version&gt;1.0.55&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
