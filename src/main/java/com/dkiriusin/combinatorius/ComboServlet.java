@@ -77,12 +77,13 @@ public class ComboServlet extends HttpServlet {
 			final long lastModified = CIOUtils.lastModifiedFile(files);
 			// generate ETag
 			final String eTag = ComboHelper.getInstance().generateEtagValue(files, lastModified, requestDetails.get());
-			// the actual content
-			final byte[] bytes = ComboHelper.getInstance().getContent(requestDetails.get(), files, eTag, response);
 			// check if request or files have been modified to set proper cache headers,
 			// write the binary content out if request has been modified or send conditional
 			// response headers otherwise
 			if (HttpUtils.isRequestModified(request, eTag)) {
+				// the actual content
+				final byte[] bytes = ComboHelper.getInstance().getContent(requestDetails.get(), files, eTag, response);
+				// set appropriate response headers
 				setResponseHeaders(request, response, eTag, lastModified, bytes.length);
 				// update 'v' URL parameter, a.k.a fingerprint
 				getServletContext().setAttribute("com.dkiriusin.combo.v_" + requestDetails.get().getExtension(),
