@@ -296,9 +296,13 @@ class ComboHelper {
 						}
 						bytes = addArrays(bytes, file_bytes);
 					}
+					// remove existing combined files from cache
+					for (final File f : FileUtils.listFiles(cacheDir, new String[] {"cmb", "gzip"}, false)) {
+						FileUtils.deleteQuietly(f);
+					}
 					// Gzip content
 					bytes = compressConditionally(bytes, response);
-					// create new cached file otherwise
+					// create new cached file
 					if (combinedFile.createNewFile()) {
 						out = new FileOutputStream(combinedFile);
 						IOUtils.write(bytes, out);
