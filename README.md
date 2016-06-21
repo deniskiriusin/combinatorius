@@ -29,6 +29,6 @@
 &lt;dependency&gt;
     &lt;groupId&gt;com.dkiriusin&lt;/groupId&gt;
     &lt;artifactId&gt;combinatorius&lt;/artifactId&gt;
-    &lt;version&gt;1.0.55&lt;/version&gt;
+    &lt;version&gt;1.0.56&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
