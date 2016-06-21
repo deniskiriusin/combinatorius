@@ -1,6 +1,6 @@
 <h1>Combinatorius &mdash; CSS and JavaScript concatenation tool</h1><a href="https://travis-ci.org/deniskiriusin/combinatorius"><img src="https://travis-ci.org/deniskiriusin/combinatorius.svg?branch=master"/></a>
 
-<h1>Key features:</h1>
+<h2>Key features:</h2>
 * Combined files to reduce the number of HTTP requests by combining all scripts into a single script, and similarly combining all CSS into a single stylesheet.
 * Local caching of the combined files for even better response times.
 * Appropriate <code>Expires</code> and <code>Cache-Control</code> headers to help browser with conditional requests.
@@ -12,7 +12,7 @@
 * Flexible directory structure support.
 * Simple configuration, usage and deployment.
 
-<h1>JSP tag:</h1>
+<h2>JSP tag:</h2>
 <pre>
 &lt;%@ taglib uri="https://github.com/deniskiriusin/combinatorius" prefix="cb" %&gt;
 
@@ -24,7 +24,7 @@
 &lt;cb:combo type="js" path="${path}"&gt;&lt;/cb:combo&gt;
 </pre>
 
-<h1>Maven dependency:</h1>
+<h2>Maven dependency:</h2>
 <pre>
 &lt;dependency&gt;
     &lt;groupId&gt;com.dkiriusin&lt;/groupId&gt;
