@@ -1,3 +1,2 @@
 Created-By: Denis Kiriusin (deniskir@gmail.com)
 Name: com/dkiriusin/combinatorius
-Sealed: true
