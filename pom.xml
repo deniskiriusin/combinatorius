@@ -39,7 +39,7 @@
 		<connection>scm:git:git://github.com/deniskiriusin/combinatorius.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/deniskiriusin/combinatorius.git</developerConnection>
 		<url>http://github.com/deniskiriusin/combinatorius</url>
-		<tag>combinatorius-v1.0.56</tag>
+		<tag>combinatorius-v1.0.57</tag>
 	</scm>
 
 	<properties>
@@ -148,7 +148,7 @@
 							<manifestFile>${project.basedir}/src/main/resources/META-INF/MANIFEST.MF</manifestFile>
 							<index>true</index>
 							<manifest>
-								<addClasspath>true</addClasspath>
+								<addClasspath>false</addClasspath>
 							</manifest>
 							<manifestEntries>
 								<url>${project.url}</url>
