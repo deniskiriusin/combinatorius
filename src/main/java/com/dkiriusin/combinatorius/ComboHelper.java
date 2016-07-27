@@ -127,7 +127,7 @@ class ComboHelper {
 				MimeType.css ? getYUICSSCompressorSettings() : getYUIJsvsScriptCompressorSettings();
 		return new StringBuilder(34).append("\"")
 				.append(DigestUtils.md5Hex(filepaths.toString() + lastModified + yui_settings
-						+ ComboServlet.isCompressionEnabled())).append("\"").toString();
+						+ CombinatoriusServlet.isCompressionEnabled())).append("\"").toString();
 	}
 
 	/**
@@ -146,7 +146,7 @@ class ComboHelper {
 		final String resources = qsParams.get("resources");
 		String theme = qsParams.get("theme");
 		if (theme == null) {
-			Cookie cookie = CookieUtils.getCookie(request, ComboServlet.combinatoriusTheme);
+			Cookie cookie = CookieUtils.getCookie(request, CombinatoriusServlet.combinatoriusTheme);
 			if (cookie != null && cookie.getValue() != null) {
 				theme = cookie.getValue().trim();
 			}
@@ -171,7 +171,7 @@ class ComboHelper {
 	final String getCombinedFileName(final RequestDetails requestDetails, final String eTag) throws IOException {
 		final StringBuilder sb = new StringBuilder(50).append(eTag.substring(1, eTag.length() - 1)).append(".")
 				.append(requestDetails.getExtension()).append(".cmb");
-		if (ComboServlet.isCompressionEnabled()) {
+		if (CombinatoriusServlet.isCompressionEnabled()) {
 			sb.append(".gzip");
 		}
 		return sb.toString();
@@ -206,7 +206,7 @@ class ComboHelper {
 	 * @throws IOException
 	 */
 	final byte[] compressConditionally(final byte[] bytes, final HttpServletResponse response) throws IOException {
-		if (ComboServlet.isCompressionEnabled() && !response.containsHeader("Content-Encoding")) {
+		if (CombinatoriusServlet.isCompressionEnabled() && !response.containsHeader("Content-Encoding")) {
 			return CIOUtils.gzipContent(bytes);
 		}
 		return bytes;
@@ -225,7 +225,7 @@ class ComboHelper {
 		if (!file.getName().endsWith(".css") && !file.getName().endsWith(".js")) {
 			throw new IllegalArgumentException("File type is incorrect. Must be either .css or .js");
 		}
-		if (!ComboServlet.isYUICompressorEnabled()) {
+		if (!CombinatoriusServlet.isYUICompressorEnabled()) {
 			throw new IllegalStateException("YUI Compressor must be enabled in combinatorius.properties "
 					+ "to perform file minification");
 		}
@@ -233,15 +233,15 @@ class ComboHelper {
 		switch (requestDetails.getMimeType()) {
 			case css:
 				result = CIOUtils.minifyCSS(IOUtils.toByteArray(new FileInputStream(file)),
-						ComboServlet.getYUICSSCompressorLinebreakpos());
+						CombinatoriusServlet.getYUICSSCompressorLinebreakpos());
 				break;
 			case js:
 				result = CIOUtils.minifyJS(IOUtils.toByteArray(new FileInputStream(file)),
-						ComboServlet.getYUIJavaScriptCompressorLinebreak(),
-						ComboServlet.isYUIJavaScriptCompressorMunge(),
-						ComboServlet.isYUIJavaScriptCompressorVerbose(),
-						ComboServlet.isYUIJavaScriptCompressorPreserveAllSemiColons(),
-						ComboServlet.isYUIJavaScriptCompressorDisableOptimisations());
+						CombinatoriusServlet.getYUIJavaScriptCompressorLinebreak(),
+						CombinatoriusServlet.isYUIJavaScriptCompressorMunge(),
+						CombinatoriusServlet.isYUIJavaScriptCompressorVerbose(),
+						CombinatoriusServlet.isYUIJavaScriptCompressorPreserveAllSemiColons(),
+						CombinatoriusServlet.isYUIJavaScriptCompressorDisableOptimisations());
 				break;
 			default:
 				break;
@@ -265,7 +265,7 @@ class ComboHelper {
 		byte[] bytes = new byte[] {};
 		try {
 			// get cache directory
-			final File cacheDir = requestDetails.getMimeType() == MimeType.css ? ComboServlet.getCachedCssDir() : ComboServlet.getCachedJsDir();
+			final File cacheDir = requestDetails.getMimeType() == MimeType.css ? CombinatoriusServlet.getCachedCssDir() : CombinatoriusServlet.getCachedJsDir();
 			// combined file
 			final String combinedFileName = getCombinedFileName(requestDetails, eTag);
 			final File combinedFile = FileUtils.getFile(cacheDir, combinedFileName);
@@ -275,12 +275,12 @@ class ComboHelper {
 			} else {
 				OutputStream out = null;
 				try {
-					final Pattern OMITED_FILES = Pattern.compile(ComboServlet.getYUIOmitFilesFromMinificationRegEx());
+					final Pattern OMITED_FILES = Pattern.compile(CombinatoriusServlet.getYUIOmitFilesFromMinificationRegEx());
 					for (final File f : files) {
 						final Matcher m = OMITED_FILES.matcher(f.getAbsolutePath());
 						byte[] file_bytes = null;
 						// check if the file is not already minified, do not minify such files
-						if (!m.matches() && ComboServlet.isYUICompressorEnabled()) {
+						if (!m.matches() && CombinatoriusServlet.isYUICompressorEnabled()) {
 							// minification is expensive process so we keep minified files in local cache
 							final String cached_file_name = getMinifiedFileName(f);
 							final File cached_file = FileUtils.getFile(cacheDir, cached_file_name);
@@ -330,18 +330,18 @@ class ComboHelper {
 	 * Returns YUI CssCompresor's settings as String.
 	 */
 	final private String getYUICSSCompressorSettings() {
-		return ComboServlet.isYUICompressorEnabled() + "" + ComboServlet.getYUICSSCompressorLinebreakpos();
+		return CombinatoriusServlet.isYUICompressorEnabled() + "" + CombinatoriusServlet.getYUICSSCompressorLinebreakpos();
 	}
 
 	/**
 	 * Returns YUI JavaScriptCompresor's settings as String.
 	 */
 	final private String getYUIJsvsScriptCompressorSettings() {
-		return ComboServlet.isYUICompressorEnabled() +
-				"" + ComboServlet.getYUIJavaScriptCompressorLinebreak() +
-				"" + ComboServlet.isYUIJavaScriptCompressorDisableOptimisations() +
-				"" + ComboServlet.isYUIJavaScriptCompressorMunge() +
-				"" + ComboServlet.isYUIJavaScriptCompressorPreserveAllSemiColons();
+		return CombinatoriusServlet.isYUICompressorEnabled() +
+				"" + CombinatoriusServlet.getYUIJavaScriptCompressorLinebreak() +
+				"" + CombinatoriusServlet.isYUIJavaScriptCompressorDisableOptimisations() +
+				"" + CombinatoriusServlet.isYUIJavaScriptCompressorMunge() +
+				"" + CombinatoriusServlet.isYUIJavaScriptCompressorPreserveAllSemiColons();
 	}
 
 	/**

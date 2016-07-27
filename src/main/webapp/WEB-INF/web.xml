@@ -12,7 +12,7 @@
   
   <servlet>
     <servlet-name>Combinatorius</servlet-name>
-    <servlet-class>com.dkiriusin.combinatorius.ComboServlet</servlet-class>
+    <servlet-class>com.dkiriusin.combinatorius.CombinatoriusServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
   <servlet-mapping>

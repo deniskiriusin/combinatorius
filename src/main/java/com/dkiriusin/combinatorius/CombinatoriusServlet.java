@@ -30,7 +30,7 @@ import org.apache.commons.io.IOUtils;
 /**
  * Main servlet class responsible of handling HTTP requests and generating responses.  
  */
-public class ComboServlet extends HttpServlet {
+public class CombinatoriusServlet extends HttpServlet {
 
 	/**
 	 * 

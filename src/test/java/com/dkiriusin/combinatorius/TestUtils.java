@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.mockito.Mockito;
 
-import com.dkiriusin.combinatorius.ComboServlet;
+import com.dkiriusin.combinatorius.CombinatoriusServlet;
 
 public class TestUtils {
 	
@@ -55,7 +55,7 @@ public class TestUtils {
 
 	static final Properties loadTestProperties() throws URISyntaxException, FileNotFoundException, IOException {
 		final URL testPropertiesURL = new URL(
-				TestUtils.class.getResource(File.separator + ComboServlet.propertiesFileName).toString());
+				TestUtils.class.getResource(File.separator + CombinatoriusServlet.propertiesFileName).toString());
 		final File file = new File(testPropertiesURL.toURI());
 		final Properties properties = new Properties();
 		properties.load(new FileInputStream(file));

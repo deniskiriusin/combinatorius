@@ -36,7 +36,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.dkiriusin.combinatorius.CIOUtils;
-import com.dkiriusin.combinatorius.ComboServlet;
+import com.dkiriusin.combinatorius.CombinatoriusServlet;
 import com.dkiriusin.combinatorius.Property;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -103,7 +103,7 @@ public class CIOUtilsTest {
 	@Test
 	public void testLoadPropertiesFromClasspath() throws IOException {
 		Properties properties = new Properties();
-		properties = CIOUtils.loadPropertiesFromClasspath(ComboServlet.propertiesFileName);
+		properties = CIOUtils.loadPropertiesFromClasspath(CombinatoriusServlet.propertiesFileName);
 		final String cssDirPropertyName = Property.CSS_DIR.getName();
 		Assert.assertTrue("Properties file should contain [" + cssDirPropertyName + "] key",
 				properties.get(cssDirPropertyName) != null);

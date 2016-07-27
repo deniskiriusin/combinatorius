@@ -54,7 +54,7 @@ public class UIControllerFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) {
 		try {
-			properties = CIOUtils.loadPropertiesFromClasspath(ComboServlet.propertiesFileName);
+			properties = CIOUtils.loadPropertiesFromClasspath(CombinatoriusServlet.propertiesFileName);
 			cssDirPath = properties.getProperty(Property.CSS_DIR.getName());
 			jsDirPath = properties.getProperty(Property.JS_DIR.getName());
 			modifyFileStrategy = new ModifyFileStrategy();

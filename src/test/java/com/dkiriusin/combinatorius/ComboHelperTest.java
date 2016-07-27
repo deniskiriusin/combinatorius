@@ -45,7 +45,7 @@ public class ComboHelperTest {
 	public ExpectedException thrown = ExpectedException.none();
 
 	@InjectMocks
-	private final ComboServlet servlet = new ComboServlet();
+	private final CombinatoriusServlet servlet = new CombinatoriusServlet();
 	@Mock
 	private HttpServletRequest request;
 	@Mock
@@ -200,7 +200,7 @@ public class ComboHelperTest {
 	@Test
 	public void testGetRequestDetailsWithThemeCookieSet() throws IOException {
 		Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer(TestUtils.URL_NO_THEME));
-		Cookie cookie = new Cookie(ComboServlet.combinatoriusTheme, "green");
+		Cookie cookie = new Cookie(CombinatoriusServlet.combinatoriusTheme, "green");
 		Mockito.when(request.getCookies()).thenReturn(new Cookie[] { cookie });
 		RequestDetails requestDetails = ComboHelper.getInstance().getRequestDetails(request);
 		Assert.assertTrue("RequestDetails.type should be 'css'", requestDetails.getMimeType() == MimeType.css);

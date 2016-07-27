@@ -33,7 +33,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.dkiriusin.combinatorius.ComboServlet;
+import com.dkiriusin.combinatorius.CombinatoriusServlet;
 import com.dkiriusin.combinatorius.MimeType;
 import com.dkiriusin.combinatorius.Property;
 import com.dkiriusin.combinatorius.RequestDetails;
@@ -49,7 +49,7 @@ public class ComboServletTest {
 	public TemporaryFolder tp = new TemporaryFolder();
 
 	@InjectMocks
-	private ComboServlet servlet = new ComboServlet();
+	private CombinatoriusServlet servlet = new CombinatoriusServlet();
 	@Mock
 	private HttpServletRequest request;
 	@Mock
@@ -189,7 +189,7 @@ public class ComboServletTest {
 		Mockito.when(properties.getProperty(Mockito.eq(Property.S_MAXAGE.getName()), Mockito.anyString())).thenReturn("31536000");
 		Mockito.when(properties.getProperty(Mockito.eq(Property.MAX_AGE.getName()), Mockito.anyString())).thenReturn("31536000");
 
-		ComboServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
+		CombinatoriusServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
 
 		Mockito.verify(response).setContentType(requestDetails.get().getMimeType().getName());
 		Mockito.verify(response).setHeader("Etag", "test_etag");
@@ -207,7 +207,7 @@ public class ComboServletTest {
 		Mockito.when(properties.getProperty(Mockito.eq(Property.S_MAXAGE.getName()), Mockito.anyString())).thenReturn("31536000");
 		Mockito.when(properties.getProperty(Mockito.eq(Property.MAX_AGE.getName()), Mockito.anyString())).thenReturn("31536000");
 
-		ComboServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
+		CombinatoriusServlet.setResponseHeaders(request, response, "test_etag", 127151112L, 128);
 
 		Mockito.verify(response).setContentType(requestDetails.get().getMimeType().getName());
 		Mockito.verify(response).setHeader("Etag", "test_etag");
@@ -220,7 +220,7 @@ public class ComboServletTest {
 
 	@Test
 	public void testSetConditionalResponseHeaders() {
-		ComboServlet.setConditionalResponseHeaders(request, response);
+		CombinatoriusServlet.setConditionalResponseHeaders(request, response);
 		Mockito.verify(response).setStatus(304);
 		Mockito.verify(response).setHeader("Content-Length", "0");
 		Mockito.verify(response).setHeader("Last-Modified", request.getHeader("If-Modified-Since"));
@@ -228,7 +228,7 @@ public class ComboServletTest {
 
 	@Test
 	public void testGetThemeName() {
-		Mockito.when(cookie.getName()).thenReturn(ComboServlet.combinatoriusTheme);
+		Mockito.when(cookie.getName()).thenReturn(CombinatoriusServlet.combinatoriusTheme);
 		Mockito.when(cookie.getValue()).thenReturn("green");
 		Mockito.when(cookie.getDomain()).thenReturn("localhost");
 		Mockito.when(request.getCookies()).thenReturn(new Cookie[] { cookie });
