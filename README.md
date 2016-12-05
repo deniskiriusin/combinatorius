@@ -14,23 +14,4 @@
 * Flexible directory structure support.
 * Simple configuration, usage and deployment.
 
-<h2>JSP tag:</h2>
-<pre>
-&lt;%@ taglib uri="https://github.com/deniskiriusin/combinatorius" prefix="cb" %&gt;
-
-&lt;cb:combo type=&quot;css&quot; path=&quot;${path}&quot;&gt;
-&nbsp;&nbsp;&lt;jsp:attribute name=&quot;theme&quot;&gt;blue&lt;/jsp:attribute&gt;
-&nbsp;&nbsp;&lt;jsp:attribute name=&quot;csv_resources&quot;&gt;extra_css/extra1.css,extra_css/extra2.css&lt;/jsp:attribute&gt;
-&lt;/cb:combo&gt;
-
-&lt;cb:combo type="js" path="${path}"&gt;&lt;/cb:combo&gt;
-</pre>
-
-<h2>Maven dependency:</h2>
-<pre>
-&lt;dependency&gt;
-    &lt;groupId&gt;com.dkiriusin&lt;/groupId&gt;
-    &lt;artifactId&gt;combinatorius&lt;/artifactId&gt;
-    &lt;version&gt;1.0.58&lt;/version&gt;
-&lt;/dependency&gt;
-</pre>
+[User's Manual](https://github.com/deniskiriusin/combinatorius/wiki/How-to-use)
