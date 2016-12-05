@@ -14,4 +14,5 @@
 * Flexible directory structure support.
 * Simple configuration, usage and deployment.
 
-[User's Manual](https://github.com/deniskiriusin/combinatorius/wiki/How-to-use)
+<h2>How to use:</h2>
+[https://github.com/deniskiriusin/combinatorius/wiki/How-to-use](https://github.com/deniskiriusin/combinatorius/wiki/How-to-use)
