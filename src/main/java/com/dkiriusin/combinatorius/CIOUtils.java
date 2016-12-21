@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Properties;
@@ -88,6 +90,34 @@ class CIOUtils {
 			}
 		}
 		return gzippedBytes;
+	}
+
+	/**
+	 * Calculates the MD5 digest and returns the value as a 32 character hex string.
+	 * 
+	 * @param data - data to digest
+	 * @return MD5 digest as a hex string, never <code>null</code>
+	 */
+	static final String getMD5(String data) {
+		StringBuffer hexString = new StringBuffer();
+
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(data.getBytes());
+			byte[] hash = md.digest();
+
+			for (int i = 0; i < hash.length; i++) {
+				if ((0xff & hash[i]) < 0x10) {
+					hexString.append("0" + Integer.toHexString((0xFF & hash[i])));
+				} else {
+					hexString.append(Integer.toHexString(0xFF & hash[i]));
+				}
+			}
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException("MD5 not supported", e);
+		}
+
+		return hexString.toString();
 	}
 
 	/**

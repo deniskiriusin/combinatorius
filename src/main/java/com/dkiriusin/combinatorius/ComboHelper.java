@@ -22,7 +22,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -126,7 +125,7 @@ class ComboHelper {
 		final String yui_settings = requestDetails.getMimeType() ==
 				MimeType.css ? getYUICSSCompressorSettings() : getYUIJsvsScriptCompressorSettings();
 		return new StringBuilder(34).append("\"")
-				.append(DigestUtils.md5Hex(filepaths.toString() + lastModified + yui_settings
+				.append(CIOUtils.getMD5(filepaths.toString() + lastModified + yui_settings
 						+ CombinatoriusServlet.isCompressionEnabled())).append("\"").toString();
 	}
 
@@ -188,7 +187,7 @@ class ComboHelper {
 	final String getMinifiedFileName(final File f) throws IOException {
 		final String fileName = f.getName();
 		final StringBuilder sb = new StringBuilder(80)
-				.append(DigestUtils.md5Hex(IOUtils.toByteArray(new FileInputStream(f))))
+				.append(CIOUtils.getMD5(new String(IOUtils.toByteArray(new FileInputStream(f)), "UTF-8")))
 				.append("_")
 				.append(fileName.substring(0, fileName.lastIndexOf(".")))
 				.append(".min")

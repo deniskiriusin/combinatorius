@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -26,6 +27,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -130,6 +132,14 @@ public class CIOUtilsTest {
 		final byte[] minified_js = CIOUtils.minifyCSS(js.getBytes("UTF-8"), -1);
 		Assert.assertTrue("Initial CSS size should be 82", js.getBytes("UTF-8").length == 82);
 		Assert.assertTrue("Minified CSS size should be 55", minified_js.length == 55);
+	}
+
+	@Test
+	public void testGetMD5() throws NoSuchAlgorithmException {
+		final String s = "Combinatorius";
+		final String hash1 = DigestUtils.md5Hex(s.getBytes());
+		final String hash2 = CIOUtils.getMD5(s);
+		Assert.assertTrue("Incorrect hash", hash1.equals(hash2));
 	}
 
 }
