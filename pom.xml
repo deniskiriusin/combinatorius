@@ -93,13 +93,6 @@
 	</properties>
 
 	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-library</artifactId>
-				<version>${hamcrest.version}</version>
-			</dependency>
-		</dependencies>
 	</dependencyManagement>
 
 	<build>
@@ -461,12 +454,14 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.version}</version>
 			<scope>compile</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.yahoo.platform.yui</groupId>
 			<artifactId>yuicompressor</artifactId>
 			<version>${yuicompressor.version}</version>
 			<scope>compile</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<!-- Provided dependencies -->
