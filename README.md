@@ -134,7 +134,7 @@ It might be useful for testing purposes or with rarely used resources that shoul
 
 ### JSP tag
 
-It is recommended to use JSP tag in order to generate a valid Combinatorius URL. One tag for CSS and one for JavaScript respectively. The only mandatory attributes are type and path.
+It is recommended to use JSP tag in order to generate a valid Combinatorius URL. One tag for CSS and one for JavaScript respectively. The only mandatory attributes are `type` and `path`.
 ```xml
 <%@ taglib uri="https://github.com/deniskiriusin/combinatorius" prefix="cb" %>
 
