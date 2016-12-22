@@ -26,7 +26,7 @@
 
 The library is available from the Central Repository and easy to setup.
 
-1. Add dependencied
+##### 1. Add dependencied
 
 ```xml
 <dependency>
@@ -39,12 +39,13 @@ You have to add YUI Compressor dependency as well in case you want to take advan
 ```xml
 <dependency>
     <groupId>com.yahoo.platform.yui</groupId>
-		<artifactId>yuicompressor</artifactId>
-		<version>2.4.8</version>
+    <artifactId>yuicompressor</artifactId>
+    <version>2.4.8</version>
 </dependency>
 ```
 
-2. Register new servlet
+##### 2. Register new servlet
+
 ```xml
 <servlet>
     <servlet-name>Combinatorius</servlet-name>
@@ -56,7 +57,8 @@ You have to add YUI Compressor dependency as well in case you want to take advan
 </servlet-mapping>
 ```
 
-3. Create `combinatorius.properties` file and place it in the Classpath.
+##### 3. Create `combinatorius.properties` file and place it in the Classpath
+
 ```
 #---------------------#
 # required properties #
@@ -110,7 +112,7 @@ CSS theme represents `prop.themes.dir` sub-directory with one or more CSS resour
 
 ### Additional resources
 
-It might be useful for testing or with rarely used resources that should not be included in to main assembly by default.
+It might be useful for testing purposes or with rarely used resources that should not be included in to main assembly by default.
 
 `/combo/&type=js&resources=extra_js/extra1.js,extra_js/extra2.js`
 
