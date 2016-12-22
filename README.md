@@ -2,7 +2,7 @@
 
 <a href="https://travis-ci.org/deniskiriusin/combinatorius"><img src="https://travis-ci.org/deniskiriusin/combinatorius.svg?branch=master"/></a>
 
-Demo: <a href="http://combinatorius.dkiriusin.com" target="_blank">http://combinatorius.dkiriusin.com</a>
+### Demo: <a href="http://combinatorius.dkiriusin.com" target="_blank">http://combinatorius.dkiriusin.com</a>
 
 ## Table of contents
 
