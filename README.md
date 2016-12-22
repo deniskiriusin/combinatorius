@@ -102,7 +102,23 @@ prop.YUI.JavaScriptCompressor.disableOptimisations = true
 # Define files to be omitted of minification ('.*\.min\.(js|css)$' by default)
 prop.YUI.OmitFilesFromMinificationRegEx = .*\.min\.(js|css)$
 ```
-Combinatorius reads all CSS and JavaScript resources from `prop.css.dir` and `prop.js.dir` directories recursively in alphabetic order. Minified and compressed content sent back to client with all necessary HTTP headers set. Resources corresponding the regular expression `prop.YUI.OmitFilesFromMinificationRegEx` are not minified.
+Combinatorius reads all CSS and JavaScript resources from `prop.css.dir` and `prop.js.dir` directories recursively in alphabetic order and caches them in `prop.css.cache.dir` and `prop.js.cache.dir` directories respectively.
+
+```
+dir/
+├── css/
+│   ├── main.css
+│   ├── layout.css
+├── css_cache/
+│   ├── 5f87023f44e39b9e735111b02bd7a40e.css.cmb.gzip
+└── js/
+│   ├── jquery-1.11.3.min.js
+│   └── jquery-ui.js
+└── js_cache/
+    └── e04df45335c9227366384ba3994663ec.js.cmb.gzip
+```
+
+Minified and compressed content sent back to client with all necessary HTTP headers set. Resources corresponding the regular expression `prop.YUI.OmitFilesFromMinificationRegEx` are not minified by YUI Compressor.
 
 ### CSS themes support
 
