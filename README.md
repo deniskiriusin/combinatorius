@@ -35,7 +35,7 @@ The library is available from the Central Repository and easy to setup.
     <version>1.0.60</version>
 </dependency>
 ```
-You have to add YUI Compressor dependency as well in case you want to take advantage of YUI minification.  
+You have to add YUI Compressor as well in case you want to take advantage of YUI minification.  
 ```xml
 <dependency>
     <groupId>com.yahoo.platform.yui</groupId>
