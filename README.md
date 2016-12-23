@@ -111,7 +111,7 @@ dir/
 │   ├── layout.css
 ├── css_cache/
 │   ├── 5f87023f44e39b9e735111b02bd7a40e.css.cmb.gzip
-└── js/
+├── js/
 │   ├── jquery-1.11.3.min.js
 │   └── jquery-ui.js
 └── js_cache/
