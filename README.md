@@ -151,4 +151,4 @@ Using JSP tag has some additional benefits like static web resources versioning 
 
 ## Contributing
 
-Pull requests are welcomed.
+Pull requests are welcome.
