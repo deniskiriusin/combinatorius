@@ -6,7 +6,7 @@
 	<version>1.0.61-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>CSS and JavaScript concatenation tool</name>
-	<description>A simple and effective tool for CSS and JavaScript concatenation</description>
+	<description>CSS and JavaScript concatenation tool</description>
 	<url>https://github.com/deniskiriusin/combinatorius</url>
 
 	<developers>
