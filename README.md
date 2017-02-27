@@ -1,6 +1,7 @@
 # Combinatorius &mdash; CSS and JavaScript concatenation tool 
 
 <a href="https://travis-ci.org/deniskiriusin/combinatorius"><img src="https://travis-ci.org/deniskiriusin/combinatorius.svg?branch=master"/></a>
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.dkiriusin/combinatorius/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.dkiriusin/combinatorius)
 
 ### Demo: <a href="http://combinatorius.dkiriusin.com" target="_blank">http://combinatorius.dkiriusin.com</a>
 
